@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="webkit" name="renderer">
+    <meta content="15317273575564615446375" property="qc:admins">
+    <meta property="og:image" content="https://assets.segmentfault.com/v-5e82b917/global/img/static/touch-icon.png">
+    <meta content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ" name="alexaVerifyID">
+    <meta content="app-id=958101793, app-argument=" name="apple-itunes-app">
+    <title>创建新账号 - SegmentFault 思否</title>
+
+    <meta content="SegmentFault 思否 为开发者提供问答、学习与交流编程知识的平台，创造属于开发者的时代！" name="description">
+
+    <meta content="SegmentFault,思否,javascript,php,python,java,mysql,ios,android,vue.js,node.js,html,css,ruby,git,docker,前端" name="keywords">
+
+    <link href="/opensearch.xml" rel="search" title="SegmentFault" type="application/opensearchdescription+xml">
+    <link rel="shortcut icon" href="https://assets.segmentfault.com/v-5e82b917/global/img/favicon.ico">
+    <link rel="apple-touch-icon" href="https://assets.segmentfault.com/v-5e82b917/global/img/static/touch-icon.png">
+
+    <meta content="#00965e" name="msapplication-TileColor">
+    <meta name="msapplication-square150x150logo" content="https://assets.segmentfault.com/v-5e82b917/global/img/static/touch-icon.png">
+    <meta content="bcf7fd80dca60d53d46d5b46e1b990ca" name="baidu_union_verify">
+
+
+    <link href="/feeds/questions" rel="alternate" title="SegmentFault 最新问题" type="application/atom+xml">
+    <link href="/feeds/blogs" rel="alternate" title="SegmentFault 最新文章" type="application/atom+xml">
+
+
+
+
+
+    <link rel="stylesheet" href="https://assets.segmentfault.com/v-5e82b917/css/global.css">
+    <link rel="stylesheet" href="https://assets.segmentfault.com/v-5e82b917/css/vendors.css">
+
+    <link rel="stylesheet" href="https://assets.segmentfault.com/v-5e82b917/css/account.css">
+
+
+    <script>
+        var _oa = [], OA_google = true;
+
+        function OA_script(src, cb) {
+            var s = document.createElement('script'), m = document.getElementsByTagName('script')[0];
+
+            if (cb) {
+                s.onload = cb;
+            }
+
+            s.async = 1;
+            s.defer = 1;
+            s.src = src;
+            m.parentNode.insertBefore(s, m);
+        }
+
+        function OA_show(name) {
+            _oa.push(name);
+            document.write('<div id="OA_holder_' + name + '"></div>');
+        }
+
+        OA_script('https://sponsor.segmentfault.com/spcjs.php?id=1&block=1&repu=0&v=5e81b20e');
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-918487-8"></script>
+
+</head>
+<body>
+
+
+<div class="container ">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-7 col-lg-5 col-xl-4">
+            <div class="text-center">
+                <a class="text-hide sf-logo d-inline-block" href="http://segmentfault.com">SegmentFault</a>
+            </div>
+
+            <div class="card border-0 mt-4" id="registerDiv">
+                <div class="card-body">
+                    <h3 class="text-center mb-3">注册账号</h3>
+                    <form class="register-form" action="/api/user/phone/register" method="POST" role="form">
+                        <div class="form-group">
+                            <input type="input" class="form-control form-control-lg" name="name" placeholder="你的名字" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="input" class="form-control form-control-lg" name="phone" placeholder="手机号" required>
+                        </div>
+                        <div class="form-group captch-block">
+                            <div class="input-group">
+                                <input type="input" class="form-control mr-2 rounded form-control-lg" name="cap" placeholder="右边字符" autocomplete="off">
+                                <div class="input-group-append">
+                                    <a id="loginReloadCaptcha" href="javascript:void(0)">
+                                        <img data-src="/user/captcha?w=150&h=48" class="captcha" width="150" height="48"/></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-lg" name="code" placeholder="验证码" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary btn-lg" type="button" id="getAuthCode" data-url="/api/user/phone/register/send">获取验证码</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">注册</button>
+                    </form>
+                    <div class="text-muted text-center font-size-14 mt-3">继续即代表同意<a href="/tos" target="_blank">《服务条款》</a>和<a href="/privacy" target="_blank">《隐私政策》</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    window.serverTime = 1586013875000;
+</script>
+
+<script>
+    (function (w) {
+        w.SF = {
+            staticUrl: "https://assets.segmentfault.com/v-5e82b917/"
+        };
+        w.SF.token = (function () {
+            var _f1Z9R = //'9vu'
+                'fc8'+'b'//'TKw'
+                +'o'//'o'
+                +//'UOG'
+                'c9'+//'j'
+                '9'+'ca'//'pY'
+                +'c0'//'Mv'
+                +'a'//'3io'
+                +'cd'//'Ruw'
+                +//'C2C'
+                'bd8'+''///*'l'*/'l'
+                +//'GpO'
+                '56'+'p6f'//'p6f'
+                +''///*'A2'*/'A2'
+                +/* 'q'//'q' */''+'a4'//'e'
+                +//'t'
+                'fda'+//'Mnl'
+                '9b'+'5'//'i'
+                +'7'//'37R'
+                +//'FI'
+                '8df'+'iq'//'iq'
+                +'8'//'C'
+                , _BPD = [[4,5],[19,22],[31,33]];
+
+            for (var i = 0; i < _BPD.length; i ++) {
+                _f1Z9R = _f1Z9R.substring(0, _BPD[i][0]) + _f1Z9R.substring(_BPD[i][1]);
+            }
+
+            return _f1Z9R;
+        })();;
+    })(window);
+
+    var lock = {
+        type: "",
+        text: '',
+        table: {"ban_post":[1,"\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+    };
+
+    var ddosMode = false;
+
+    (function (currentUrl) {
+        if (typeof URL != 'undefined') {
+            var baseUrl = new URL('https://segmentfault.com');
+
+            if (baseUrl.protocol != currentUrl.protocol || baseUrl.host != currentUrl.host) {
+                window.location.href = baseUrl.protocol + '//' + baseUrl.host
+                    + currentUrl.pathname + currentUrl.search + currentUrl.hash;
+            }
+        }
+    })(window.location);
+</script>
+
+<script src="https://assets.segmentfault.com/v-5e82b917/js/jquery.js"></script>
+<script src="https://assets.segmentfault.com/v-5e82b917/js/vendors.js"></script>
+<script src="https://assets.segmentfault.com/v-5e82b917/js/account.bundle.js"></script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-918487-8');
+</script>
+
+</body>
+</html>
+

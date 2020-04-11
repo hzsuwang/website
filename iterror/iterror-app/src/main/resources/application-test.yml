@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: test
+production:
+  mode: false
+
+debug: true
+store:
+  aliyun-end-point: https://oss-cn-hangzhou.aliyuncs.com
+
+

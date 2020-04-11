@@ -1,0 +1,1269 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="webkit" name="renderer">
+    <meta content="15317273575564615446375" property="qc:admins">
+    <meta property="og:image" content="https://assets.segmentfault.com/v-5e82b917/global/img/static/touch-icon.png">
+    <meta content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ" name="alexaVerifyID">
+    <meta content="app-id=958101793, app-argument=" name="apple-itunes-app">
+    <title>RocketMQ(4.6.1)系列教程--消息存储篇 - 心无私天地宽 - SegmentFault 思否</title>
+
+    <meta name="description" content="ConsumeQueue：消息消费队列，消息到达 Commitlog 文件后，将异步转发到消息队列，供消息消费者消费">
+
+    <meta name="keywords" content="rocketmq,java">
+
+    <link href="/opensearch.xml" rel="search" title="SegmentFault" type="application/opensearchdescription+xml">
+    <link rel="shortcut icon" href="https://assets.segmentfault.com/v-5e82b917/global/img/favicon.ico">
+    <link rel="apple-touch-icon" href="https://assets.segmentfault.com/v-5e82b917/global/img/static/touch-icon.png">
+
+    <meta content="#00965e" name="msapplication-TileColor">
+    <meta name="msapplication-square150x150logo" content="https://assets.segmentfault.com/v-5e82b917/global/img/static/touch-icon.png">
+    <meta content="bcf7fd80dca60d53d46d5b46e1b990ca" name="baidu_union_verify">
+
+
+    <link href="/feeds/questions" rel="alternate" title="SegmentFault 最新问题" type="application/atom+xml">
+    <link href="/feeds/blogs" rel="alternate" title="SegmentFault 最新文章" type="application/atom+xml">
+
+
+
+
+
+    <link rel="stylesheet" href="https://assets.segmentfault.com/v-5e82b917/css/global.css">
+    <link rel="stylesheet" href="https://assets.segmentfault.com/v-5e82b917/css/vendors.css">
+
+    <link rel="stylesheet" href="https://assets.segmentfault.com/v-5e82b917/css/detail.css">
+
+
+    <script>
+        var _oa = [], OA_google = true;
+
+        function OA_script(src, cb) {
+            var s = document.createElement('script'), m = document.getElementsByTagName('script')[0];
+
+            if (cb) {
+                s.onload = cb;
+            }
+
+            s.async = 1;
+            s.defer = 1;
+            s.src = src;
+            m.parentNode.insertBefore(s, m);
+        }
+
+        function OA_show(name) {
+            _oa.push(name);
+            document.write('<div id="OA_holder_' + name + '"></div>');
+        }
+
+        OA_script('https://sponsor.segmentfault.com/spcjs.php?id=1&block=1&repu=0&tag=rocketmq&v=5e81b20e');
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-918487-8"></script>
+
+    <!-- 推荐引擎 -->
+    <script charset="utf-8" id="ParadigmSDK" src="https://nbrecsys.4paradigm.com/sdk/js/ParadigmSDK_v2.js" data="216" defSI="594">
+    </script>
+    <script>
+        ParadigmSDK.init("46e957bd9dea4acdaa15b4b64aff728f");
+        ParadigmSDK.trackDetailPageShow();
+    </script>
+</head>
+<body>
+
+<img style="height: 0; width: 0; display: none" src="https://assets.segmentfault.com/v-5e82b917/global/img/static/touch-icon.png">
+
+<div id="gridMapHoverBox" style="position:absolute; border: 1px solid #00965e; z-index: 99; font-size: 10px; background:#fff"></div>
+
+<nav id="sf-header" class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand text-hide sf-header-logo" href="/">SegmentFault</a>
+
+        <a class="btn btn-primary d-lg-none ml-auto mr-2" href="/user/login">注册登录</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav font-weight-bold">
+                <li class="nav-item">
+                    <a href="/" class="nav-link ">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/questions" class="nav-link ">问答</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blogs" class="nav-link active">专栏</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/news" class="nav-link ">资讯</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/lives" class="nav-link ">课程</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/events" class="nav-link ">活动</a>
+                </li>
+                <li class="nav-item dropdown hover-down">
+                    <a href="###" id="navbarDiscover" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link  dropdown-toggle ">发现</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDiscover">
+                        <a class="dropdown-item" href="/groups">圈子</a>
+                        <a class="dropdown-item" href="/tags">标签</a>
+                        <a class="dropdown-item" href="/groups?tab=jobs">酷工作</a>
+                        <a class="dropdown-item" href="/users">排行榜</a>
+                        <a class="dropdown-item" href="/badges">徽章</a>
+                        <a class="dropdown-item" href="/notes">笔记</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://docs.segmentfault.com" target="_blank">开发手册</a>
+                        <a class="dropdown-item" href="https://business.segmentfault.com/ads?utm_source=sf-header" target="_blank">广告投放<i class="ml-2 text-warning fas fa-external-link-square"></i>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0 flex-fill d-none d-xl-block px-4" action="/search">
+                <input class="form-control w-100" id="searchBox" name="q" type="search" value="" placeholder="搜索关键字" aria-label="搜索">
+            </form>
+
+            <ul class="navbar-nav navbar-user ml-auto align-items-lg-center">
+                <li class="nav-item d-none d-lg-flex">
+                    <a href="/user/login" class="btn btn-link mr-2 require-login">立即登录</a>
+                </li>
+                <li class="nav-item d-none d-lg-flex">
+                    <a href="/user/register" class="btn btn-primary require-login">免费注册</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<input id="articleId" value="1190000022264889" class="hidden"/>
+<div class="d-none d-xl-flex justify-content-center">
+    <script type="text/javascript">
+        OA_show(2);
+    </script>
+</div>
+<div class="position-relative">
+    <div class="container my-sm-4 my-1" id="sf-article">
+        <div class="row">
+            <div class="col-12 col-xl w-0">
+                <div class="card border-0 mb-4">
+                    <div class="card-body p-lg-30">
+                        <div class="d-flex justify-content-between align-items-center mb-3" id="sf-article_author">
+                            <div class="information d-flex align-items-center">
+                                <a class="d-flex align-items-centers mr-1" href="/u/xinwusitiandikuan">
+                                    <picture class="mr-2 d-sm-block d-none">
+                                        <img class="d-inline-block rounded-circle " width="32"
+                                             src="https://avatar-static.segmentfault.com/363/807/3638073270-5d05e6152f2ed_big64" aria-hidden="true"/>
+                                    </picture>
+                                    <strong class="align-self-center">心无私天地宽</strong>
+                                </a>
+                                <ul class="list-inline mb-0 authentication-info sflex-center font-size-14">
+                                    <li class="list-inline-item">
+                                        <i class="fas fa-dice-d8" style="color:#BF7158"></i>
+                                        <span style="color: #BF7158;font-weight:bold">371</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="functional-area-left sticky-top d-none d-xl-flex"></div>
+                        <h1 class="h2 mb-3" id="sf-article_title">
+                            <a class="text-body" href="/a/1190000022264889">RocketMQ(4.6.1)系列教程--消息存储篇</a>
+                        </h1>
+                        <div class="d-sm-flex d-none flex-wrap align-items-center mb-4" id="sf-article_tags">
+                            <div class="m-n1"><a class="m-1 badge-tag" href="/t/rocketmq"
+                                                 data-toggle="popover"
+                                                 data-img="" data-placement="top"
+                                                 data-original-title="rocketmq"
+                                                 data-id="1040000010045605">
+                                rocketmq
+                            </a><a class="m-1 badge-tag" href="/t/java"
+                                   data-toggle="popover"
+                                   data-img="https://avatar-static.segmentfault.com/512/342/51234253-1040000000089449_big64" data-placement="top"
+                                   data-original-title="java"
+                                   data-id="1040000000089449">
+                                <img src="https://avatar-static.segmentfault.com/868/271/868271510-54cb382abb7a1_small">
+                                java
+                            </a></div>
+                            <div class="font-size-14">
+                                <span class="text-secondary ml-2">发布于 今天 19:42 </span>
+                                <span class="split-dot"></span>
+                                <span class="text-secondary" title="阅读时长">&nbsp;约 54 分钟</span>
+                            </div>
+                        </div>
+                        <article class="article fmt article-content" data-id="1190000022264889"
+                                 data-license="cc">
+
+                            <h3>概要设计</h3>
+                            <p>RocketMQ 的存储文件，放在 ${ROCKET_HOME}/store 目录下</p>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAgN" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <ul>
+                                <li>Commitlog：消息存储文件，所有消息主题的消息都存储在 Commitlog 文件中</li>
+                                <li>ConsumeQueue：消息消费队列，消息到达 Commitlog 文件后，将异步转发到消息队列，供消息消费者消费</li>
+                                <li>IndexFile：消息索引文件，主要存储消息 key  与 offset 对应关系</li>
+                            </ul>
+                            <h3>核心消息存储类：DefaultMessageStore</h3>
+                            <pre><code class="java">// 消息存储配置属性
+private final MessageStoreConfig messageStoreConfig;
+
+// CommitLog 文件的存储实现类
+private final CommitLog commitLog;
+
+// 消息队列存储缓存表
+private final ConcurrentMap&lt;String/* topic */, ConcurrentMap&lt;Integer/* queueId */, ConsumeQueue&gt;&gt; consumeQueueTable;
+
+// 消息队列文件 ComsumeQueue 刷盘线程
+private final FlushConsumeQueueService flushConsumeQueueService;
+
+// 清除 CommitLog 文件服务
+private final CleanCommitLogService cleanCommitLogService;
+
+// 清除 ConsumeQueue 文件服务
+private final CleanConsumeQueueService cleanConsumeQueueService;
+
+// 索引文件实现类
+private final IndexService indexService;
+
+// MappedFile 分配服务
+private final AllocateMappedFileService allocateMappedFileService;
+
+// CommitLog 消息分发，根据 CommitLog 文件构建 ConsumeQueue、IndexFile 文件
+private final ReputMessageService reputMessageService;
+
+// 存储 HA 机制
+private final HAService haService;
+
+// 消息堆内存缓存
+private final TransientStorePool transientStorePool;
+
+// 消息拉取长轮询模式消息达到监听器
+private final MessageArrivingListener messageArrivingListener;
+
+// broker 配置属性
+private final BrokerConfig brokerConfig;
+
+// 文件刷盘检测点
+private StoreCheckpoint storeCheckpoint;
+
+// CommitLog 文件转发请求
+private final LinkedList&lt;CommitLogDispatcher&gt; dispatcherList;</code></pre>
+                            <h3>消息发送存储流程</h3>
+                            <p>代码入口： <strong>DefaultMessageStore#putMessage</strong></p>
+                            <ol>
+                                <li>对消息的一些检查，如 当前如果是 SLAVE 则不写入。</li>
+                                <li>如果当前延迟等级大于 0，那么会 将该消息放入 SCHEDULE_TOPIC_XXXX 主题中，队列为 延迟等级 - 1</li>
+                            </ol>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAgV" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <p><strong>CommitLog#putMessage</strong></p>
+                            <pre><code class="java">// 延迟等级大于 0
+if (msg.getDelayTimeLevel() &gt; 0) {
+  if (msg.getDelayTimeLevel() &gt; this.defaultMessageStore.getScheduleMessageService().getMaxDelayLevel()) {
+    msg.setDelayTimeLevel(this.defaultMessageStore.getScheduleMessageService().getMaxDelayLevel());
+  }
+
+  topic = ScheduleMessageService.SCHEDULE_TOPIC;
+
+  // 这个方法，将 延迟等级 - 1
+  queueId = ScheduleMessageService.delayLevel2QueueId(msg.getDelayTimeLevel());
+
+  // Backup real topic, queueId
+  MessageAccessor.putProperty(msg, MessageConst.PROPERTY_REAL_TOPIC, msg.getTopic());
+  MessageAccessor.putProperty(msg, MessageConst.PROPERTY_REAL_QUEUE_ID, String.valueOf(msg.getQueueId()));
+  msg.setPropertiesString(MessageDecoder.messageProperties2String(msg.getProperties()));
+
+  msg.setTopic(topic);
+  msg.setQueueId(queueId);
+}
+}</code></pre>
+                            <ol><li>每个 commitlog 大小为 <strong>1G</strong>，用<strong>第一个偏移量</strong>作为文件名；MappedFileQueue 可以看做是 ${ROCKET_HOME}/store/commitlog 目录，MappedFile 则是 文件；在写 commitlog 之前，会写获取锁，并追加写文件。</li></ol>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAgW" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <ol><li>创建全局唯一消息 ID，消息有 16 个字节</li></ol>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAgZ" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <ol><li>计算消息长度</li></ol>
+                            <p>代码入口：<strong>CommitLog#calMsgLength</strong></p>
+                            <pre><code class="java">protected static int calMsgLength(int sysFlag, int bodyLength, int topicLength, int propertiesLength) {
+        int bornhostLength = (sysFlag &amp; MessageSysFlag.BORNHOST_V6_FLAG) == 0 ? 8 : 20;
+        int storehostAddressLength = (sysFlag &amp; MessageSysFlag.STOREHOSTADDRESS_V6_FLAG) == 0 ? 8 : 20;
+        final int msgLen = 4 //TOTALSIZE
+            + 4 //MAGICCODE
+            + 4 //BODYCRC
+            + 4 //QUEUEID
+            + 4 //FLAG
+            + 8 //QUEUEOFFSET
+            + 8 //PHYSICALOFFSET
+            + 4 //SYSFLAG
+            + 8 //BORNTIMESTAMP
+            + bornhostLength //BORNHOST
+            + 8 //STORETIMESTAMP
+            + storehostAddressLength //STOREHOSTADDRESS
+            + 4 //RECONSUMETIMES
+            + 8 //Prepared Transaction Offset
+            + 4 + (bodyLength &gt; 0 ? bodyLength : 0) //BODY
+            + 1 + topicLength //TOPIC
+            + 2 + (propertiesLength &gt; 0 ? propertiesLength : 0) //propertiesLength
+            + 0;
+        return msgLen;
+    }</code></pre>
+                            <ol>
+                                <li>计算长度，是为了根据 commitlog 当前的空闲空间，判断是否要重新创建。 如果 消息长度 + 8 大于 commitlog 空闲空间，则重新创建新的 CommitLog。<strong>高4节存储当前文件剩余空间，低4字节存储魔数</strong>
+                                </li>
+                                <li>将消息写到 ByteBuffer 中，创建 AppendMessageResult 。只是将消息存储到 MappedFile 映射的 ByteBuffer 中，没有刷盘。</li>
+                            </ol>
+                            <p><strong>DefaultAppendMessageCallback#doAppend</strong></p>
+                            <pre><code class="java">final long beginTimeMills = CommitLog.this.defaultMessageStore.now();
+            // Write messages to the queue buffer
+byteBuffer.put(this.msgStoreItemMemory.array(), 0, msgLen);
+
+AppendMessageResult result = new AppendMessageResult(AppendMessageStatus.PUT_OK, wroteOffset, msgLen, msgId, msgInner.getStoreTimestamp(), queueOffset, CommitLog.this.defaultMessageStore.now() - beginTimeMills);</code></pre>
+                            <ol><li>根据刷盘策略，进行同步刷盘或者异步刷盘，序列化消息到磁盘。执行 HA 主从复制</li></ol>
+                            <p><strong>CommitLog#putMessage</strong></p>
+                            <pre><code class="java">handleDiskFlush(result, putMessageResult, msg);
+handleHA(result, putMessageResult, msg);</code></pre>
+                            <h3>存储文件组织与内存映射</h3>
+                            <h4>MappedFileQueue 映射文件队列</h4>
+                            <pre><code class="java">// 存储目录
+private final String storePath;
+
+// 单个文件的存储大小
+private final int mappedFileSize;
+
+// MappedFile 文件集合
+private final CopyOnWriteArrayList&lt;MappedFile&gt; mappedFiles = new CopyOnWriteArrayList&lt;MappedFile&gt;();
+
+// 创建 MappedFile 服务类
+private final AllocateMappedFileService allocateMappedFileService;
+
+// 当前刷盘指针，指针之前数据已完成刷盘
+private long flushedWhere = 0;
+
+// 当前数据提交指针，内存中 ByteBuffer 当前的写指针，该值大于等于 flushedWhere
+private long committedWhere = 0;</code></pre>
+                            <h5>根据 时间戳 查找 MappedFile</h5>
+                            <pre><code class="java">public MappedFile getMappedFileByTime(final long timestamp) {
+        Object[] mfs = this.copyMappedFiles(0);
+
+        if (null == mfs)
+            return null;
+
+        for (int i = 0; i &lt; mfs.length; i++) {
+            MappedFile mappedFile = (MappedFile) mfs[i];
+            if (mappedFile.getLastModifiedTimestamp() &gt;= timestamp) {
+                return mappedFile;
+            }
+        }
+
+        return (MappedFile) mfs[mfs.length - 1];
+    }
+</code></pre>
+                            <p>流程：从 MappedFile 列表的第一个开始查找，找到第一个最后一次更新时间大于 timestamp 的文件，不存在，则返回最后一个文件。</p>
+                            <h5>根据 offset 查找 MappedFile</h5>
+                            <pre><code class="java">public MappedFile findMappedFileByOffset(final long offset, final boolean returnFirstOnNotFound) {
+        try {
+            MappedFile firstMappedFile = this.getFirstMappedFile();
+            MappedFile lastMappedFile = this.getLastMappedFile();
+            if (firstMappedFile != null &amp;&amp; lastMappedFile != null) {
+               ...
+               ...
+                 // 因为 第一个 MappedFile 偏移量可能不是 0 （文件定期删除机制导致）。因此采用此算法。
+                    int index = (int) ((offset / this.mappedFileSize) - (firstMappedFile.getFileFromOffset() / this.mappedFileSize));
+                    MappedFile targetFile = null;
+                    try {
+                        targetFile = this.mappedFiles.get(index);
+                    } catch (Exception ignored) {
+                    }
+                          // 找到的文件合法，直接返回
+                    if (targetFile != null &amp;&amp; offset &gt;= targetFile.getFileFromOffset()
+                        &amp;&amp; offset &lt; targetFile.getFileFromOffset() + this.mappedFileSize) {
+                        return targetFile;
+                    }
+
+                    // 遍历所有 MappedFiles，如果 offset 在 MappedFile 的 起始区间，则返回
+                    for (MappedFile tmpMappedFile : this.mappedFiles) {
+                        if (offset &gt;= tmpMappedFile.getFileFromOffset()
+                            &amp;&amp; offset &lt; tmpMappedFile.getFileFromOffset() + this.mappedFileSize) {
+                            return tmpMappedFile;
+                        }
+                    }
+                }
+
+                // 未找到 直接返回第一个文件
+                if (returnFirstOnNotFound) {
+                    return firstMappedFile;
+                }
+            }
+        } catch (Exception e) {
+            log.error("findMappedFileByOffset Exception", e);
+        }
+
+        return null;
+    }
+</code></pre>
+                            <ul>
+                                <li>
+                                    <p>根据算法</p>
+                                    <pre><code class="java">int index = (int) ((offset / this.mappedFileSize) - (firstMappedFile.getFileFromOffset() / this.mappedFileSize));</code></pre>
+                                    <p>查找 MappedFile。</p>
+                                </li>
+                                <li>如果 index 查找的 MappedFile 无效。则遍历所有的 MappedFile，如果 offset 落在 MappedFile 的起始区间内。则直接返回</li>
+                                <li>如果还是找不到，返回第一个文件</li>
+                            </ul>
+                            <h4>MappedFile 内存映射文件</h4>
+                            <pre><code class="java">// 操作系统页大小
+public static final int OS_PAGE_SIZE = 1024 * 4;
+
+// 当前 JVM 实例中 MappedFile 虚拟内存
+private static final AtomicLong TOTAL_MAPPED_VIRTUAL_MEMORY = new AtomicLong(0);
+
+// 当前 JVM 实例中 MappedFile 个数
+private static final AtomicInteger TOTAL_MAPPED_FILES = new AtomicInteger(0);
+
+// 当前该文件写指针，从 0 开始（内存映射中的写指针）
+protected final AtomicInteger wrotePosition = new AtomicInteger(0);
+
+// 当前文件的提交指针，如果开启 transientStorePoolEnable, 则数据会存储在 TransientStorePool 中，然后提交到内存映射 ByteBuffer 中，再刷写到磁盘
+protected final AtomicInteger committedPosition = new AtomicInteger(0);
+
+// 刷写到磁盘指针，该指针之前的数据持久化到磁盘中
+private final AtomicInteger flushedPosition = new AtomicInteger(0);
+
+// 文件大小
+protected int fileSize;
+
+// 文件通道
+protected FileChannel fileChannel;
+
+// 堆内存 ByteBuffer，如果不为空，数据首先将存储在该 buffer，然后提交到 MappedFile 对应的内存映射文件 Buffer。transientStorePoolEnable 为 true 时不为空。
+protected ByteBuffer writeBuffer = null;
+
+// 堆内存池，transientStorePoolEnable 为 true 时启动。
+protected TransientStorePool transientStorePool = null;
+
+// 文件名称
+private String fileName;
+
+// 该文件的初始偏移量
+private long fileFromOffset;
+
+// 物理文件
+private File file;
+
+// 物理文件对应的内存映射 Buffer
+private MappedByteBuffer mappedByteBuffer;
+
+// 文件最后一次写入时间
+private volatile long storeTimestamp = 0;
+
+// 是否是 MappedFileQueue 中第一个文件
+private boolean firstCreateInQueue = false;</code></pre>
+                            <h5>MappedFile 初始化</h5>
+                            <p>根据是否开启 transientStorePoolEnable 存在两种初始化情况。 transientStorePoolEnable 为 true 表示内存先存储在堆外内存，然后通过 Commit 线程将数据提交到内存映射 MappedByteBuffer 中，再通过 Flush 线程将内存映射 Buffer 中的数据持久化到磁盘中。</p>
+                            <p><strong>MappedFile#init</strong> 逻辑简单，不贴代码了。创建文件，将文件内容映射到 Buffer。</p>
+                            <p>如果 transientStorePoolEnable 为 true，则初始化 MappedFile 的 writeBuffer。</p>
+                            <h5>MappedFile 提交</h5>
+                            <p><strong>MappedFile#commit</strong></p>
+                            <pre><code class="java">public int commit(final int commitLeastPages) {
+        // transientStorePoolEnable= true,该值不为null
+        if (writeBuffer == null) {
+            return this.wrotePosition.get();
+        }
+        // 是否可以被提交
+        if (this.isAbleToCommit(commitLeastPages)) {
+            if (this.hold()) {
+                commit0(commitLeastPages);
+                this.release();
+            } else {
+                log.warn("in commit, hold failed, commit offset = " + this.committedPosition.get());
+            }
+        }
+
+        // All dirty data has been committed to FileChannel.
+        if (writeBuffer != null &amp;&amp; this.transientStorePool != null &amp;&amp; this.fileSize == this.committedPosition.get()) {
+            this.transientStorePool.returnBuffer(writeBuffer);
+            this.writeBuffer = null;
+        }
+
+        return this.committedPosition.get();
+}
+
+// 执行提交逻辑，所以，其实所谓的提交，只是设置了 committedPosition 的位置，因为 MappedFile 还有个刷盘机制
+protected void commit0(final int commitLeastPages) {
+        int writePos = this.wrotePosition.get();
+        int lastCommittedPosition = this.committedPosition.get();
+
+        if (writePos - this.committedPosition.get() &gt; 0) {
+            try {
+                // 共享数据，但是各自维护一套 position,mark,limit
+                ByteBuffer byteBuffer = writeBuffer.slice();
+                byteBuffer.position(lastCommittedPosition);
+                byteBuffer.limit(writePos);
+                this.fileChannel.position(lastCommittedPosition);
+                this.fileChannel.write(byteBuffer);
+                this.committedPosition.set(writePos);
+            } catch (Throwable e) {
+                log.error("Error occurred when commit data to FileChannel.", e);
+            }
+        }
+}</code></pre>
+                            <h5>MappedFile 刷盘</h5>
+                            <p>刷盘指将内存中的数据刷写到磁盘。这里有专门的刷盘线程在处理刷盘， 具体可查看 FlushCommitLogService，异步刷盘时，真正调用刷盘的类是：CommitRealTimeService，同步刷盘则由 GroupCommitService</p>
+                            <p><strong>MappedFile#flush</strong></p>
+                            <pre><code class="java">public int flush(final int flushLeastPages) {
+  if (this.isAbleToFlush(flushLeastPages)) {
+    if (this.hold()) {
+      int value = getReadPosition();
+
+      try {
+        //We only append data to fileChannel or mappedByteBuffer, never both.
+        if (writeBuffer != null || this.fileChannel.position() != 0) {
+          // 刷盘
+          this.fileChannel.force(false);
+        } else {
+          // 刷盘
+          this.mappedByteBuffer.force();
+        }
+      } catch (Throwable e) {
+        log.error("Error occurred when force data to disk.", e);
+      }
+
+      this.flushedPosition.set(value);
+      this.release();
+    } else {
+      log.warn("in flush, hold failed, flush offset = " + this.flushedPosition.get());
+      this.flushedPosition.set(getReadPosition());
+    }
+  }
+  return this.getFlushedPosition();
+}</code></pre>
+                            <h5>MappedFile 销毁</h5>
+                            <p><strong>MappedFile#destroy</strong></p>
+                            <pre><code class="java">public void shutdown(final long intervalForcibly) {
+  // 第一次调用一定是 true
+  if (this.available) {
+    this.available = false;
+    this.firstShutdownTimestamp = System.currentTimeMillis();
+    // 尝试释放资源
+    this.release();
+  } else if (this.getRefCount() &gt; 0) {
+    //  RocketMQ 有 最大拒绝存活时间概念。只要超过了，会对资源的 引用 -100。再尝试释放资源
+    if ((System.currentTimeMillis() - this.firstShutdownTimestamp) &gt;= intervalForcibly) {
+      this.refCount.set(-1000 - this.getRefCount());
+      this.release();
+    }
+  }
+}
+
+// 资源释放
+public void release() {
+  long value = this.refCount.decrementAndGet();
+  if (value &gt; 0)
+    return;
+  synchronized (this) {
+    // 将 cleanupOver 设置为 true， 判断是否清理完毕的判断参数。
+    this.cleanupOver = this.cleanup(value);
+  }
+}
+
+// 判断是否已经被清理干净
+public boolean isCleanupOver() {
+  return this.refCount.get() &lt;= 0 &amp;&amp; this.cleanupOver;
+}
+
+public boolean cleanup(final long currentRef) {
+  if (this.isAvailable()) {
+    log.error("this file[REF:" + currentRef + "] " + this.fileName
+              + " have not shutdown, stop unmapping.");
+    return false;
+  }
+
+  if (this.isCleanupOver()) {
+    log.error("this file[REF:" + currentRef + "] " + this.fileName
+              + " have cleanup, do not do it again.");
+    return true;
+  }
+
+  clean(this.mappedByteBuffer);
+  // 维护 总文件大小
+  TOTAL_MAPPED_VIRTUAL_MEMORY.addAndGet(this.fileSize * (-1));
+  // 维护 文件个数
+  TOTAL_MAPPED_FILES.decrementAndGet();
+  log.info("unmap file[REF:" + currentRef + "] " + this.fileName + " OK");
+  return true;
+}</code></pre>
+                            <h4>TransientStorePool</h4>
+                            <pre><code class="java">// availableBuffers 大小，默认5个。 broker 配置文件设置 transientStorePoolSize
+private final int poolSize;
+
+// ByteBuffer 大小。默认为 mappedFileSizeCommitLog.表明 TransientStorePoolSize 为 commitlog 文件服务。
+private final int fileSize;
+
+// 双端队列
+private final Deque&lt;ByteBuffer&gt; availableBuffers;</code></pre>
+                            <h3>RocketMQ 存储文件</h3>
+                            <h4>文件介绍 ${ROCKET_HOME}/store</h4>
+                            <ul>
+                                <li>commitlog：消息存储目录</li>
+                                <li>
+                                    <p>config：运行期间一些配置信息，主要包括以下信息</p>
+                                    <ul>
+                                        <li>consumerFilter.json：主题消息过滤信息</li>
+                                        <li>consumerOffset.json：集群消费模式消息消费进度</li>
+                                        <li>delayOffset.json：延迟消息队列拉取进度</li>
+                                        <li>subscriptionGroup.json：消息消费组配置信息</li>
+                                        <li>topic.json：topic 配置属性</li>
+                                    </ul>
+                                </li>
+                                <li>consumequeue：消息消费队列目录</li>
+                                <li>index: 消息索引文件存储目录</li>
+                                <li>abort：存在 abort 文件说明 broker 非正常关闭，默认启动时创建，正常退出之前删除</li>
+                                <li>checkpoint：文件检测点，存储 commitlog 文件最后一次刷盘时间戳、consumequeue 最后一次刷盘时间、index 索引文件最后一次刷盘时间戳</li>
+                            </ul>
+                            <h4>commitlog</h4>
+                            <h5>消息查找</h5>
+                            <p><strong>CommitLog#getMessage()</strong></p>
+                            <pre><code class="java">public SelectMappedBufferResult getMessage(final long offset, final int size) {
+  // 默认是 1G 1024 * 1024 * 1024
+  int mappedFileSize = this.defaultMessageStore.getMessageStoreConfig().getMappedFileSizeCommitLog();
+
+  // 根据 offset 找到 MappedFile
+  MappedFile mappedFile = this.mappedFileQueue.findMappedFileByOffset(offset, offset == 0);
+  if (mappedFile != null) {
+    // 根据 pos（消息起点）,size(消息长度) 从 ByteBuffer 中获取消息
+    int pos = (int) (offset % mappedFileSize);
+    return mappedFile.selectMappedBuffer(pos, size);
+  }
+  return null;
+}
+
+// MappedFile#selectMappedBuffer()
+public SelectMappedBufferResult selectMappedBuffer(int pos, int size) {
+        int readPosition = getReadPosition();
+        if ((pos + size) &lt;= readPosition) {
+            if (this.hold()) {
+                // 共享内存，但各自保存 pos,mark,limit 指针
+                ByteBuffer byteBuffer = this.mappedByteBuffer.slice();
+                byteBuffer.position(pos);
+                ByteBuffer byteBufferNew = byteBuffer.slice();
+                byteBufferNew.limit(size);
+                return new SelectMappedBufferResult(this.fileFromOffset + pos, byteBufferNew, size, this);
+            } else {
+                log.warn("matched, but hold failed, request pos: " + pos + ", fileFromOffset: "
+                    + this.fileFromOffset);
+            }
+        } else {
+            log.warn("selectMappedBuffer request pos invalid, request pos: " + pos + ", size: " + size
+                + ", fileFromOffset: " + this.fileFromOffset);
+        }
+
+        return null;
+    }</code></pre>
+                            <h4>consumequeue 文件</h4>
+                            <p>consumequeue 目录下的每个文件夹，代表一个 主题。二级目录，则是该主题下的队列（默认4个）。</p>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAhb" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <p>Consumequeue条目，存储格式<br><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAhc" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span><br>consumeQueue 默认包含 30W 个条目，单个文件长度  30W * 20 字节 = 5 .7MB  </p>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAhd" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <h5>根据 offset 查找消息</h5>
+                            <pre><code class="java">public SelectMappedBufferResult getIndexBuffer(final long startIndex) {
+  // 600w 5.7mb
+  int mappedFileSize = this.mappedFileSize;
+  // 获取文件物理偏移量
+  long offset = startIndex * CQ_STORE_UNIT_SIZE;
+  if (offset &gt;= this.getMinLogicOffset()) {
+    // ? 为什么 这里可以根据 offset 找到对应的 MappedFile
+    MappedFile mappedFile = this.mappedFileQueue.findMappedFileByOffset(offset);
+    if (mappedFile != null) {
+      SelectMappedBufferResult result = mappedFile.selectMappedBuffer((int) (offset % mappedFileSize));
+      return result;
+    }
+  }
+  return null;
+}</code></pre>
+                            <h5>根据时间戳查找消息</h5>
+                            <pre><code class="java">public long getOffsetInQueueByTime(final long timestamp) {
+  // 定位 MappedFile
+    MappedFile mappedFile = this.mappedFileQueue.getMappedFileByTime(timestamp);
+  ...
+  ...
+  long minPhysicOffset = this.defaultMessageStore.getMinPhyOffset();
+  ...
+  ...
+    // 二分查找法
+    while (high &gt;= low) {
+      midOffset = (low + high) / (2 * CQ_STORE_UNIT_SIZE) * CQ_STORE_UNIT_SIZE;
+      byteBuffer.position(midOffset);
+      // 记住 consumequeue 条目的数据结构， 前8个字节是 commitlog offset 偏移量
+      long phyOffset = byteBuffer.getLong();
+      // 获取消息大小， 4个字节
+      int size = byteBuffer.getInt();
+      // 物理偏移量 小于 最新的物理偏移量，很明显这是一个无效的消息。
+      if (phyOffset &lt; minPhysicOffset) {
+        low = midOffset + CQ_STORE_UNIT_SIZE;
+        leftOffset = midOffset;
+        continue;
+      }
+
+      long storeTime =
+        this.defaultMessageStore.getCommitLog().pickupStoreTimestamp(phyOffset, size);
+      if (storeTime &lt; 0) {
+        return 0;
+      } else if (storeTime == timestamp) {
+        targetOffset = midOffset;
+        break;
+      } else if (storeTime &gt; timestamp) {
+        high = midOffset - CQ_STORE_UNIT_SIZE;
+        rightOffset = midOffset;
+        rightIndexValue = storeTime;
+      } else {
+        low = midOffset + CQ_STORE_UNIT_SIZE;
+        leftOffset = midOffset;
+        leftIndexValue = storeTime;
+      }
+    }
+    ...
+    ...
+}</code></pre>
+                            <p>查找消息的大体流程都是：先找到 MappedFile，在从 consumequeue 中获取 offset，然后根据 offset 到 MappedFile 获取消息</p>
+                            <h4>index 索引文件（为消息建立索引）</h4>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAhf" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <ul>
+                                <li>
+                                    <p>IndexHead（共 40 个字节）</p>
+                                    <ul>
+                                        <li>beginTimestamp：索引文件包含消息的最小存储时间</li>
+                                        <li>endTimestamp：包含消息的最大存储时间</li>
+                                        <li>beginPhyoffset：包含消息的最小偏移量(commitlog文件偏移量)</li>
+                                        <li>endphyoffset：包含消息的最大物理偏移量(commitlog文件偏移量)</li>
+                                        <li>Hashslotcount：hashlot 个数</li>
+                                        <li>indexcount：Index 条目列表当前已使用个数</li>
+                                    </ul>
+                                </li>
+                                <li>Hash 槽</li>
+                            </ul>
+                            <p>IndexFile 默认有 500w 个 Hash槽，每个 Hash槽存储的是落在该 Hash 槽的 hashcode 最新的 index 下标。</p>
+                            <ul><li>
+                                <p>Index条目列表</p>
+                                <ul>
+                                    <li>Hashcode：key 的 hashcode</li>
+                                    <li>Phyoffset：消息对应的物理偏移量</li>
+                                    <li>Timedif：该消息存储时间与第一条消息的时间戳差值，小于0该消息无效</li>
+                                    <li>preIndexNo：该条目的前一条 index 索引，当出现 hash 冲突时，构建的链表结构</li>
+                                </ul>
+                            </li></ul>
+                            <h5>消息索引写入</h5>
+                            <p><strong>IndexFile#putKey()</strong></p>
+                            <pre><code class="java">// key：消息key ; phyoffset：消息物理偏移量；storeTimestamp：消息存储时间
+public boolean putKey(final String key, final long phyOffset, final long storeTimestamp) {
+  // 小于 最大 index 条目数量 2000W
+  if (this.indexHeader.getIndexCount() &lt; this.indexNum) {
+    // 将 key hash
+    int keyHash = indexKeyHashMethod(key);
+    // keyHash % 500w
+    int slotPos = keyHash % this.hashSlotNum;
+    // 加上 indexHead 大小(20) 得到 hash槽 物理位置
+    int absSlotPos = IndexHeader.INDEX_HEADER_SIZE + slotPos * hashSlotSize;
+
+    FileLock fileLock = null;
+
+    try {
+
+      int slotValue = this.mappedByteBuffer.getInt(absSlotPos);
+      if (slotValue &lt;= invalidIndex || slotValue &gt; this.indexHeader.getIndexCount()) {
+        slotValue = invalidIndex;
+      }
+
+      // 获取 消息存储时间与第一条消息的时间戳差值（秒）
+      long timeDiff = storeTimestamp - this.indexHeader.getBeginTimestamp();
+      timeDiff = timeDiff / 1000;
+      if (this.indexHeader.getBeginTimestamp() &lt;= 0) {
+        timeDiff = 0;
+      } else if (timeDiff &gt; Integer.MAX_VALUE) {
+        timeDiff = Integer.MAX_VALUE;
+      } else if (timeDiff &lt; 0) {
+        timeDiff = 0;
+      }
+
+      // 写入 index 条目
+      int absIndexPos =
+        IndexHeader.INDEX_HEADER_SIZE + this.hashSlotNum * hashSlotSize
+        + this.indexHeader.getIndexCount() * indexSize;
+      this.mappedByteBuffer.putInt(absIndexPos, keyHash);
+      this.mappedByteBuffer.putLong(absIndexPos + 4, phyOffset);
+      this.mappedByteBuffer.putInt(absIndexPos + 4 + 8, (int) timeDiff);
+      this.mappedByteBuffer.putInt(absIndexPos + 4 + 8 + 4, slotValue);
+
+      // 往 hash 槽中写入 当前最新 index 条目下标
+      this.mappedByteBuffer.putInt(absSlotPos, this.indexHeader.getIndexCount());
+
+      // 更新 indexHeader 信息
+      if (this.indexHeader.getIndexCount() &lt;= 1) {
+        this.indexHeader.setBeginPhyOffset(phyOffset);
+        this.indexHeader.setBeginTimestamp(storeTimestamp);
+      }
+      this.indexHeader.incHashSlotCount();
+      this.indexHeader.incIndexCount();
+      this.indexHeader.setEndPhyOffset(phyOffset);
+      this.indexHeader.setEndTimestamp(storeTimestamp);
+  // ....
+
+}</code></pre>
+                            <h5>消息查找</h5>
+                            <p><strong>IndexFile#selectPhyOffset</strong></p>
+                            <p>代码比较简单，不贴了。流程大致如下：</p>
+                            <p>根据偏移量，从 hash 槽中，找到对应的下标。 可能会有 hash 冲突，因此，还得根据 pre index no 查找上一个消息。知道找到为止。</p>
+                            <h4>checkpoint 文件</h4>
+                            <p>记录，commitlog，consumequeue，index 文件的刷盘点</p>
+                            <p><span class="img-wrap"><img referrerpolicy="no-referrer" data-src="/img/bVbFAhg" src="https://cdn.segmentfault.com/v-5e81b20e/global/img/squares.svg" alt="image.png" title="image.png"></span></p>
+                            <ul>
+                                <li>pyysicMsgTimestamp：commitlog 文件刷盘时间点</li>
+                                <li>logicMsgTimestamp：消息消费队列刷盘时间点</li>
+                                <li>indexMsgTimestamp：index 刷盘时间点</li>
+                            </ul>
+                            <h3>实时更新消息消费队列与索引文件</h3>
+                            <p>当消息存放到 commitlog 时，ConsumeQueue，IndexFile 需要及时更新。否则消息无法被消费。通过 <strong>ReputMessageService</strong> 准实时转发 CommitLog 文件更新事件，由相应的任务处理器根据转发的消息及时更新 ConsumeQueue、IndexFile 文件。</p>
+                            <h4>更新 consumequeue</h4>
+                            <p>DefaultMessageStore 在启动时，会让 <strong>reputmesageService</strong> 先确保完成发送落后的消息。落后的消息是指， commitlog 的偏移量 落后于 comsumequeue 的最大偏移量。</p>
+                            <p><strong>DefaultMessageStore#start()</strong></p>
+                            <pre><code class="java">{
+  // 获取消息的最大的物理偏移量
+  long maxPhysicalPosInLogicQueue = commitLog.getMinOffset();
+  for (ConcurrentMap&lt;Integer, ConsumeQueue&gt; maps : this.consumeQueueTable.values()) {
+    for (ConsumeQueue logic : maps.values()) {
+      if (logic.getMaxPhysicOffset() &gt; maxPhysicalPosInLogicQueue) {
+        maxPhysicalPosInLogicQueue = logic.getMaxPhysicOffset();
+      }
+    }
+  }
+  // ...
+  // ...
+  // 启动 reputMessageService，完成 commitlog 消息转发
+  this.reputMessageService.setReputFromOffset(maxPhysicalPosInLogicQueue);
+  this.reputMessageService.start();
+
+  // 等待完成发送落后消息
+  while (true) {
+    if (dispatchBehindBytes() &lt;= 0) {
+      break;
+    }
+    Thread.sleep(1000);
+  }
+}</code></pre>
+                            <p>ReputMessageService 启动时，每次任务推送休息 <strong>1 毫秒</strong>就继续推送消息。因此是准实时的，即基本可以理解为，只要 commitlog 文件被写入， consumequeue，index 文件就会立即被更新，消费者也能及时消费到消息</p>
+                            <p><strong>ReputMessageService#run()</strong></p>
+                            <pre><code class="java">public void run() {
+  while (!this.isStopped()) {
+    try {
+      Thread.sleep(1);
+      // 转发
+      this.doReput();
+    } catch (Exception e) {
+      DefaultMessageStore.log.warn(this.getServiceName() + " service has exception. ", e);
+    }
+  }
+}</code></pre>
+                            <p><strong>ReputMessageService#doReput()</strong></p>
+                            <p>从 commitlog 中获取消息。一条一条的进行转发。将消息封装 DispatchRequest，由 CommitLogDispatcher 转发器对 DispatchRequest 进行转发。 由 CommitLogDispatcherBuildConsumeQueue 处理转发 consumequeue ，CommitLogDispatcherBuildIndex 处理转发 indexFile。</p>
+                            <pre><code class="java">private void doReput() {
+  for (boolean doNext = true; this.isCommitLogAvailable() &amp;&amp; doNext; ) {
+    // 获取可转发的数据
+    SelectMappedBufferResult result = DefaultMessageStore.this.commitLog.getData(reputFromOffset);
+    if (result != null) {
+      try {
+        this.reputFromOffset = result.getStartOffset();
+              // 一条条转发
+        for (int readSize = 0; readSize &lt; result.getSize() &amp;&amp; doNext; ) {
+          // 将消息封装为 DispatchRequest
+          DispatchRequest dispatchRequest = DefaultMessageStore.this.commitLog.checkMessageAndReturnSize(result.getByteBuffer(), false, false);
+          if (dispatchRequest.isSuccess()) {
+            if (size &gt; 0) {
+              // ...
+              // 转发
+              DefaultMessageStore.this.doDispatch(dispatchRequest);
+
+              this.reputFromOffset += size;
+              readSize += size;
+              // ...
+            }
+            }
+        }
+      }
+  }
+}</code></pre>
+                            <p>CommitLogDispatcherBuildConsumeQueue 处理转发时，交由 <strong>DefaultMessageStore#putMessagePositionInfo() </strong>方法进行转发。</p>
+                            <p>根据主题和队列ID 找到对应的 队列。最终由 ConsumeQueue 自身处理消息</p>
+                            <pre><code class="java">public void putMessagePositionInfo(DispatchRequest dispatchRequest) {
+  ConsumeQueue cq = this.findConsumeQueue(dispatchRequest.getTopic(), dispatchRequest.getQueueId());
+  cq.putMessagePositionInfoWrapper(dispatchRequest);
+}</code></pre>
+                            <p>ConsumeQueue 在处理消息时，只完成了在内存中对消息的追加</p>
+                            <p><strong>ConsumeQueue#putMessagePositionInfo</strong></p>
+                            <pre><code class="java">// ...
+// 消息追加
+this.byteBufferIndex.flip();
+this.byteBufferIndex.limit(CQ_STORE_UNIT_SIZE);
+this.byteBufferIndex.putLong(offset);
+this.byteBufferIndex.putInt(size);
+this.byteBufferIndex.putLong(tagsCode);
+// ...
+mappedFile.appendMessage(this.byteBufferIndex.array());</code></pre>
+                            <h4>更新 index</h4>
+                            <p>index 的转发任务实现类：<strong>CommitLogDispatcherBuildIndex</strong></p>
+                            <p>如果 messageIndexEnable，则构建 索引。</p>
+                            <p>如果唯一键，不为空，则构建。RocketMQ 支持为同一个消息构建多个索引，使用 空格 分割。</p>
+                            <h3>消息队列与索引文件恢复</h3>
+                            <p>加载 commitlog，consumeQueue，indexFile。rocketMQ 通过 <strong>abort 文件</strong>，判断 broker 是否正常退出。</p>
+                            <p>如果是正常退出，那么 从 MappedFile 的<strong>倒数第 3 个文件</strong>开始加载，如果不足，则从第1个开始。找到最后一个 偏移量。 并用之设置 MappedFileQueue 的 flushedPosition，commitPosition。</p>
+                            <p>如果非正常退出，则<strong>由后往前</strong>找到最后一个有效的文件，并将之所有消息 转发给 comsumequeue、indexFile。用最后一个有效文件的最后一个消息的偏移量 设置  MappedFileQueue 的 flushedPosition，commitPosition。<strong>因为重新 commitlog 消息，因为会存在 消息重复消费问题。</strong></p>
+                            <p>最后， rocketMQ 都会删掉 commitlog , consumequeue, indexFile 的脏数据。</p>
+                            <p><strong>代码位置：DefaultMessageStore#load()</strong></p>
+                            <h3>文件刷盘机制</h3>
+                            <p><strong>代码位置：Commitlog#handleDiskFlush</strong></p>
+                            <h4>同步刷盘</h4>
+                            <p>将刷盘任务封装为 <strong>GroupCommitRequest</strong>，由  <strong>GroupCommitService</strong> 每隔 <strong>10 毫秒</strong> 对一批消息进行刷盘。默认 <strong>5 秒</strong> 内，没完成刷盘动作，则视为刷盘失败。</p>
+                            <p>真正执行刷盘，则是由 <strong>MappedFile#flush</strong> 做刷盘动作。因此，如果是同步刷盘操作的话，不可能出现消息丢失</p>
+                            <h4>异步刷盘</h4>
+                            <p>异步刷盘分 2 种情况，</p>
+                            <h5>transientStorePoolEnable = true</h5>
+                            <ol>
+                                <li>消息直接追加到 ByteBuffer，wrotePosition 不断追加</li>
+                                <li>
+                                    <strong>CommitRealTimeService</strong> 线程默认每 200ms 将 ByteBuffer 新追加的内容（wrotePosition - commitPosition） 写到 MappedByteBuffer。 commitPosition 向前移动到本次提交内容的长度，wrotePosition 继续向前。</li>
+                                <li>
+                                    <strong>FlushRealTimeService</strong> 线程默认 每 500ms 将 MappedByteBuffer 刷写到磁盘。</li>
+                            </ol>
+                            <h5>transientStorePoolEnable = false</h5>
+                            <p>由 FlushRealTimeService 线程进行刷盘</p>
+                            <h3>过期文件删除</h3>
+                            <p>如果非当前写文件在一定时间间隔内没有再次被更新，则认为是过期文件，可以被删除。RocketMQ 不会关注这个文件上的消息是否全部被消费。默认每个文件的过期时间为72 个小时。默认每隔 10 秒扫描过期文件</p>
+                            <p>代码位置： <strong>DefaultMessageStore#addScheduleTask</strong></p>
+
+                        </article>
+                        <div class="text-secondary font-size-14 mb-5 d-flex justify-content-between row">
+                            <div class="col-6 text-secondary" id="sf-article_metas">阅读 37<span
+                                    class="split-dot"></span>发布于 今天 19:42 </div>
+                            <div class="operation col-6 text-right">
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="functional-area-bottom"></div>
+
+                        <div class="text-center mb-5 mt-3 text-secondary font-size-14">
+                            本作品系
+                            原创
+                            ，
+                            <a target="_blank"
+                               class="text-secondary"
+                               href="https://creativecommons.org/licenses/by-nc-nd/4.0/">采用《署名-非商业性使用-禁止演绎 4.0
+                                国际》许可协议</a>
+                        </div>
+                        <hr class="mb-0"/>
+                        <div class="article-author d-flex flex-sm-row align-items-center pt-4 row">
+                            <div class="d-flex align-items-center flex-grow-1 author-left col-sm-9 col-12">
+                                <a href="/u/xinwusitiandikuan">
+                                    <img class="rounded-circle mr-3" width="64" src="https://avatar-static.segmentfault.com/363/807/3638073270-5d05e6152f2ed_big64"
+                                         aria-hidden="true"/>
+                                </a>
+                                <div>
+                                    <h5><a class="text-body" href="/u/xinwusitiandikuan">心无私天地宽</a></h5>
+                                    <ul class="list-inline mb-0 authentication-info">
+                                        <li class="list-inline-item">
+                                            <i class="fas fa-dice-d8" style="color:#BF7158"></i>
+                                            <span style="color: #BF7158; font-size:16px; font-weight:bold">371</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="author-right flex-shrink-0 col-sm-3 col-12 text-sm-right text-left mt-sm-0 mt-3">
+                                <button type="button"
+                                        class="btn btn-primary follow-user sf_do"
+                                        data-doType="post"
+                                        data-content="{&quot;type&quot;:&quot;state&quot;,&quot;state&quot;:false,&quot;true&quot;:&quot;\u5173\u6ce8\u4f5c\u8005&quot;,&quot;false&quot;:&quot;\u6b63\u5728\u5173\u6ce8&quot;}"
+                                        data-api="/iteration/api/user/1030000007463514/follow">关注作者
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-none d-lg-block">
+                    <script type='text/javascript'>
+                        OA_show(3);
+                    </script>
+                </div>
+                <div id="comment-area" class="my-4" data-type="article" data-id="1190000022264889" data-page="1"
+                     data-user="null"></div>
+                <h5 class="mt-4">推荐阅读</h5>
+                <div class="card border-0 mb-4">
+                    <div class="list-group list-group-flush" id="paradigm-article-related"></div>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-xl-auto">
+                <div class="w-xl-300">
+                    <div class="blog card mb-4 border-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="media-avatar rounded mr-3" aria-hidden="true"></div>
+                                <div style="flex:1">
+                                    <h5><a class="text-body"
+                                           href="/blog/chenshaoping">心无私天地宽</a></h5>
+                                    <span class="badge badge-primary"
+                                          style="background-color: #007bff">用户专栏</span>
+                                </div>
+                            </div>
+                            <p class="text-secondary text-truncate-2">一手好牌打得稀巴烂的 IT 界无名小卒.我正在努力的让自己变得更加优秀。。。-- 陈少平</p>
+                            <div class="d-flex mb-3">
+                                <div class="mr-4">
+                                    <strong id="blog-followers-count"
+                                            class="followNum">5</strong>
+                                    <span class="text-secondary">人关注</span>
+                                </div>
+                                <div>
+                                    <strong>43</strong>
+                                    <span class="text-secondary">篇文章</span>
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <button type="button"
+                                        class="btn btn-primary mr-2 sf_do"
+                                        data-number-tag-class="followNum"
+                                        data-doType="post"
+                                        data-content="{&quot;type&quot;:&quot;state&quot;,&quot;state&quot;:false,&quot;true&quot;:&quot;\u5173\u6ce8\u4e13\u680f&quot;,&quot;false&quot;:&quot;\u6b63\u5728\u5173\u6ce8&quot;}"
+                                        data-api="/iteration/api/blog/1200000007463525/follow">关注专栏
+                                </button>
+
+                                <a class="btn btn-outline-primary" href="/blog/chenshaoping">专栏主页</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / 专栏信息 -->
+
+                    <div class="card border-0 overflow-hidden d-none d-xl-flex justify-content-center align-items-center float-ads">
+                        <script type='text/javascript'>
+                            OA_show(1);
+                        </script>
+                    </div>
+                    <!-- / 矩形广告位 -->
+
+                    <div class="card border-0 d-none d-xl-flex mt-4">
+                        <div class="card-body">
+                            <div class="text-center mb-3">
+                                <div class="mb25 hidden-md hidden-sm hidden-xs">
+                                    <img src="https://cdn.segmentfault.com/sponsor/20200404.png" alt="Planets" usemap ="#gridsMap" width=255 height=136>
+                                    <map name="gridsMap" id="gridsMap"></map>
+                                    <div style="text-align: center;"><a style="color:#9E9E9E; font-size:12px" href="/sponsor">广告位促销，月曝光三千万，10 元/天</a></div>
+                                    <script async src="https://cdn.segmentfault.com/sponsor/20200404.js"></script>
+                                </div>
+                            </div>
+
+                            <div class="side-promote-link">
+                                <script type='text/javascript'>
+                                    OA_show(7);
+                                    OA_show(9);
+                                    OA_show(10);
+                                    OA_show(15);
+                                    OA_show(16);
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / 格子广告、链接广告 -->
+
+                    <div class="card border-0 mt-4 overflow-hidden d-none d-xl-flex" data-article-nav>
+                        <div class="card-body">
+                            <h6 class="pt-3 position-relative bg-white" style="margin-top:-1.25rem; height:45px">
+                                目录</h6>
+                            <nav id="article-nav-list" data-article-nav-list class="font-size-14">
+
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- / 目录 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var ARTICLE = {
+        articleId: 1190000022264889,
+        title: "RocketMQ(4.6.1)系列教程--消息存储篇",
+        isLiked: false,
+        votes: 0,
+        isBookmarked: false,
+        bookmarks: 0,
+        canReward: true
+    }
+</script>
+
+
+
+
+
+
+
+
+
+<script type='text/javascript'>
+    OA_show(4);
+</script>
+
+<footer id="footer" class="bg-white py-5 font-size-14">
+    <div class="container">
+        <div class="row">
+            <dl class="col-4 col-md-2">
+                <dt class="h6">产品</dt>
+                <dd class="my-1"><a class="text-secondary" href="/questions/hottest?utm_source=sf-footer" target="_blank">热门问答</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/blogs/hottest?utm_source=sf-footer" target="_blank">热门专栏</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/lives?utm_source=sf-footer" target="_blank">热门课程</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/events?utm_source=sf-footer" target="_blank">最新活动</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/groups?utm_source=sf-footer" target="_blank">技术圈</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">酷工作</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/app?utm_source=sf-footer" target="_blank">移动客户端</a></dd>
+            </dl>
+
+            <dl class="col-4 col-md-2">
+                <dt class="h6">课程</dt>
+                <dd class="my-1"><a class="text-secondary" href="/lives/edu?tag=java&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Java 开发课程</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/lives/edu?tag=php&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">PHP 开发课程</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/lives/edu?tag=python&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Python 开发课程</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/lives/edu?category=1&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">前端开发课程</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/lives/study?category=3&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">移动开发课程</a></dd>
+            </dl>
+
+            <dl class="col-4 col-md-2 ">
+                <dt class="h6">资源</dt>
+                <dd class="my-1"><a class="text-secondary" href="/weekly?utm_source=sf-footer" target="_blank">每周精选</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/users?utm_source=sf-footer" target="_blank">用户排行榜</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/badges?utm_source=sf-footer" target="_blank">徽章</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/faq?utm_source=sf-footer" target="_blank">帮助中心</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/repu?utm_source=sf-footer" target="_blank">声望与权限</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/community?utm_source=sf-footer" target="_blank">社区服务中心</a></dd>
+            </dl>
+
+            <dl class="col-4 col-md-2">
+                <dt class="h6">合作</dt>
+                <dd class="my-1"><a class="text-secondary" href="https://about.segmentfault.com/?utm_source=sf-footer" target="_blank">关于我们</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="https://business.segmentfault.com/ads?utm_source=sf-footer" target="_blank">广告投放</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">职位发布</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="https://jinshuju.net/f/HK5r9K?utm_source=sf-footer" target="_blank">讲师招募</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="https://about.segmentfault.com/contact.html?utm_source=sf-footer" target="_blank">联系我们</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/link?utm_source=sf-footer" target="_blank">合作伙伴</a></dd>
+            </dl>
+
+            <dl class="col-4 col-md-2">
+                <dt class="h6">关注</dt>
+                <dd class="my-1"><a class="text-secondary" href="/blog/segmentfault?utm_source=sf-footer" target="_blank">产品技术日志</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/blog/community_admin?utm_source=sf-footer" target="_blank">社区运营日志</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/blog/segmentfault_news?utm_source=sf-footer" target="_blank">市场运营日志</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/blog/segmentfault_team?utm_source=sf-footer" target="_blank">团队日志</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/blog/interview?utm_source=sf-footer" target="_blank">社区访谈</a></dd>
+            </dl>
+
+            <dl class="col-4 col-md-2" id="license">
+                <dt class="h6">条款</dt>
+                <dd class="my-1"><a class="text-secondary" href="/tos?utm_source=sf-footer" target="_blank">服务条款</a></dd>
+                <dd class="my-1"><a class="text-secondary" href="/privacy?utm_source=sf-footer" target="_blank">隐私政策</a></dd>
+                <dd class="my-1">
+                    <a class="text-secondary" href="/app?utm_source=sf-footer"><img width="60" src="https://cdn.segmentfault.com/v-5e81b20e/page/img/app/appQrcode.png" class="app-qrcode"><br>下载 App</a>
+                </dd>
+            </dl>
+        </div>
+        <hr class="mt-2 mb-4">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="text-secondary">
+                    <p class="mb-1">Copyright &copy; 2011-2020 SegmentFault. 当前呈现版本 19.02.27</p>
+                    <p class="mb-0">
+                        <a class="text-secondary mr-2" target="_blank" href="http://beian.miit.gov.cn" rel="nofollow">浙ICP备 15005796号-2</a>
+                        <a class="text-secondary mr-2" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000" rel="nofollow">浙公网安备 33010602002000号</a>
+                        杭州堆栈科技有限公司版权所有
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 text-right">
+                <div class="shareContent ">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    window.serverTime = 1586014124000;
+</script>
+
+<script>
+    (function (w) {
+        w.SF = {
+            staticUrl: "https://assets.segmentfault.com/v-5e82b917/"
+        };
+        w.SF.token = (function () {
+            var _1qTviE = '9b1'//'x7w'
+                +//'z'
+                '08e'+'yKS'//'yKS'
+                +'d79'//'1F'
+                +//'9'
+                '9'+'81c'//'YFS'
+                +'13'//'wrT'
+                +'4'//'s1E'
+                +//'jp'
+                'e'+'3'//'Xu'
+                +//'3bk'
+                'd'+'921'//'8qo'
+                +//'pr'
+                '7'+'1e5'//'2W'
+                +'477'//'I'
+                +//'zVd'
+                'b41'+'1'//'XW'
+                , _NbB = [[6,9],[9,10]];
+
+            for (var i = 0; i < _NbB.length; i ++) {
+                _1qTviE = _1qTviE.substring(0, _NbB[i][0]) + _1qTviE.substring(_NbB[i][1]);
+            }
+
+            return _1qTviE;
+        })();;
+    })(window);
+
+    var lock = {
+        type: "",
+        text: '',
+        table: {"ban_post":[1,"\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+    };
+
+    var ddosMode = false;
+
+    (function (currentUrl) {
+        if (typeof URL != 'undefined') {
+            var baseUrl = new URL('https://segmentfault.com');
+
+            if (baseUrl.protocol != currentUrl.protocol || baseUrl.host != currentUrl.host) {
+                window.location.href = baseUrl.protocol + '//' + baseUrl.host
+                    + currentUrl.pathname + currentUrl.search + currentUrl.hash;
+            }
+        }
+    })(window.location);
+</script>
+
+<script src="https://assets.segmentfault.com/v-5e82b917/js/jquery.js"></script>
+<script src="https://assets.segmentfault.com/v-5e82b917/js/vendors.js"></script>
+<script src="https://assets.segmentfault.com/v-5e82b917/js/detail.bundle.js"></script>
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-918487-8');
+</script>
+
+</body>
+</html>
+

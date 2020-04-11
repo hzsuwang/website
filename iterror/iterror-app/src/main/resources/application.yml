@@ -1,0 +1,36 @@
+server:
+  port: 10101
+spring:
+  application:
+    name: iterror-app
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size:  500MB
+  devtools:
+    restart:
+      enabled: true
+      exclude: static/**,public/**
+      additional-paths: src/main/java
+  mvc:
+    static-path-pattern: /static/**
+  resources:
+    add-mappings: true
+
+  thymeleaf:
+    prefix: classpath:/templates
+    check-template-location: true
+    cache: false
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML5
+    servlet:
+      content-type: text/html
+## qk配置相关
+loggingRoot: /usr/local/output/iterror-app
+
+store:
+  img-server-domain: https://qkcdn.qkvoice.com
+  audio-server-domain: https://qkcdn.qkvoice.com

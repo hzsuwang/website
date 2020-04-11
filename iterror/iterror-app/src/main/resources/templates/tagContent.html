@@ -1,0 +1,2044 @@
+
+<!DOCTYPE HTML><html lang="zh-CN"><head><meta charset="UTF-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><meta name="renderer" content="webkit"/><meta property="qc:admins" content="15317273575564615446375"/><meta property="og:image" content="https://cdn.segmentfault.com/v-5e81b20e/global/img/touch-icon.png"/><meta name="viewport"
+                                                                                                                                                                                                                                                                                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/><meta name="alexaVerifyID" content="LkzCRJ7rPEUwt6fVey2vhxiw1vQ"/><meta name="apple-itunes-app" content="app-id=958101793, app-argument="><title>标签树 - SegmentFault 思否</title><meta name="description" content="SegmentFault 思否是中国领先的新一代开发者社区和专业的技术媒体。我们为中文开发者提供纯粹、高质的技术交流平台以及最前沿的技术行业动态，帮助更多的开发者获得认知和能力的提升。自社区上线以来在广大开发者群体中享有极高的口碑及影响力，以技术问答、技术专栏、技术课程、技术资讯为核心的产品形态，目前已经覆盖和服务了超过 1000 万开发者，同时 SegmentFault 思否团队也是中国区最大的黑客马拉松 Hackathon 创新力赛事组织者。 腾讯、阿里、百度、美团、京东、滴滴、360等上千个技术团队已经入驻思否社区，我们也欢迎热爱技术的你一起加入交流与学习。"/><meta name="keywords" content="SegmentFault,思否,开发者社区,技术新闻资讯,技术问答社区,技术博客专栏,技术笔记,技术号,技术圈,技术直播,在线编程,开源社区,开源项目,程序员,云计算,AI,区块链,前端,后端,小程序,安全,运维,软件开发,编程,cto,javascript,php,python,java,ios,android"/><link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="SegmentFault"/><link rel="shortcut icon" href="https://cdn.segmentfault.com/v-5e81b20e/global/img/favicon.ico"/><link rel="apple-touch-icon" href="https://cdn.segmentfault.com/v-5e81b20e/global/img/touch-icon.png"><meta name="msapplication-TileColor" content="#009a61"/><meta name="msapplication-square150x150logo" content="https://cdn.segmentfault.com/v-5e81b20e/global/img/touch-icon.png"/><meta name="baidu_union_verify" content="bcf7fd80dca60d53d46d5b46e1b990ca"><link rel="alternate" type="application/atom+xml" title="SegmentFault 最新问题" href="/feeds/questions"><link rel="alternate" type="application/atom+xml" title="SegmentFault 最新文章" href="/feeds/blogs"><link rel="stylesheet" href="https://cdn.segmentfault.com/v-5e81b20e/global/css/global.css"/><link rel="stylesheet" href="https://cdn.segmentfault.com/v-5e81b20e/tag/css/tag.css"/><link rel="stylesheet" href="https://cdn.segmentfault.com/v-5e81b20e/global/css/responsive.css"/><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-918487-8"></script><script>
+    var _oa = [], OA_google = true;
+
+    function OA_script(src, cb) {
+        var s = document.createElement('script'), m = document.getElementsByTagName('script')[0];
+
+        if (cb) {
+            s.onload = cb;
+        }
+
+        s.async = 1;
+        s.defer = 1;
+        s.src = src;
+        m.parentNode.insertBefore(s, m);
+    }
+
+    function OA_show(name) {
+        _oa.push(name);
+        document.write('<div id="OA_holder_' + name + '"></div>');
+    }
+
+    OA_script('https://sponsor.segmentfault.com/spcjs.php?id=1&block=1&repu=0&v=5e81b20e');
+</script></head><body data-mod="tag"
+                      class="tag-index "><!--[if lt IE 9]><div class="alert alert-danger topframe" role="alert">你的浏览器实在<strong>太太太太太太旧了</strong>，放学别走，升级完浏览器再说 <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a></div><![endif]--><img id="icon4weChat" style="height: 0;width: 0;" data-src="https://cdn.segmentfault.com/v-5e81b20e/global/img/touch-icon-512.png"><div id="gridMapHoverBox" style="position:absolute; border: 1px solid #009a61; z-index:99; font-size: 10px; background:#fff"></div><div class="global-nav sf-header sf-header--index"><div class="bottom-nav visible-xs visible-sm "><div class="opts"><a class="opts-group " href="/"><i class="fa fa-home" aria-hidden="true"></i><span>首页</span></a><a class="opts-group " href="/questions"><i class="fa fa-comments" aria-hidden="true"></i><span>问答</span></a><a class="opts-group " href="/blogs"><i class="fa fa-pencil-square" aria-hidden="true"></i><span>专栏</span></a><a class="opts-group " href="/lives"><i class="fa fa-play-circle" aria-hidden="true"></i><span>讲堂</span></a><div class="opts-group"><div class="btn-group dropup"><i class="fa fa-bars dropdown hoverDropdown" data-toggle="dropdown" aria-hidden="true"><span>更多</span></i><ul class="dropdown-menu"><li><a href="/jobs">职位</a></li><li><a href="/events">活动</a></li><li><a href="/tags">标签</a></li><li><a href="/badges">徽章</a></li></ul></div></div></div></div><nav class="container nav"><div class="visible-xs visible-sm header-response"><a href="/search" style="display:block"><i class="fa fa-search" aria-hidden="true"></i></a><div class="sf-header__logo sf-header__logo--response"><h1><a href="/" style="height:24px; background-size: auto 24px;"></a></h1></div><a href="/user/login" class="pull-right login-btn"><i class="fa fa-user" aria-hidden="true"></i></a></div><script>
+    mobileScroll(
+        function(direction) {
+            try {
+                if (direction === 'down') {
+                    document.querySelector('.bottom-nav').classList.add('hidden')
+                } else {
+                    document.querySelector('.bottom-nav').classList.remove('hidden')
+                }
+            } catch(err) {}
+        }
+    );
+    function mobileScroll( fn ) {
+        var beforeScrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+            fn = fn || function() {};
+        window.addEventListener("scroll", function() {
+            var afterScrollTop = document.documentElement.scrollTop || document.body.scrollTop,
+                delta = afterScrollTop - beforeScrollTop;
+            if( delta === 0 ) return false;
+            fn( delta > 0 ? "down" : "up" );
+            beforeScrollTop = afterScrollTop;
+        }, false);
+    }
+</script><div class="row hidden-xs hidden-sm"><div class="col-sm-8 col-md-9 col-lg-9"><div class="sf-header__logo"><h1><a href="/">SegmentFault</a></h1></div><div><ul class="menu list-inline pull-left hidden-xs"><li class="menu__item"><a href="/" class="">首页</a></li><li class="menu__item"><a href="/questions" class="">问答</a></li><li class="menu__item"><a href="/blogs" class="">专栏</a></li><li class="menu__item"><a href="/news" class="">资讯</a></li><li class="menu__item"><a class=" " href="/lives" class="">课程</a></li><li class="menu__item"><a href="/events" class="">活动</a></li><li class="menu__item menu__item--more dropdown"><a href="##" class="dropdown-toggle dropdownBtn" data-toggle="dropdown">
+    发现<i class="fa fa-caret-down" style="font-size: 14px;margin-left: 5px;" aria-hidden="true"></i></a><div class="dropdown-block hidden"><ul class="dropdown-content-menu"><li><a href="/groups">圈子</a></li><li><a href="/tags">标签</a></li><li><a href="/groups?tab=jobs">酷工作</a></li><li><a href="/users">排行榜</a></li><li><a href="/badges">徽章</a></li><li><a href="/notes">笔记</a></li><li><a href="https://docs.segmentfault.com" target="_blank">开发手册<i style="line-height: 20px;font-size: 12px;color: #F5A623;" class="ml10 fa fa-external-link-square"></i></a></li><li><a href="https://business.segmentfault.com/ads?utm_source=sf-header" target="_blank">广告投放<i style="line-height: 20px;font-size: 12px;color: #F5A623;" class="ml10 fa fa-external-link-square"></i></a></li></ul></div></li><li class="menu__item visible-sm-inline-block"><a href="/search"><span class="glyphicon glyphicon-search" style="vertical-align: middle;"></span></a></li></ul><form action="/search" class="header-search  hidden-md hidden-xs pull-right" ><button class="btn btn-link"><span class="sr-only">搜索</span><span class="glyphicon glyphicon-search"></span></button><input id="searchBox" name="q" type="text"  placeholder="搜索问题或关键字" class="form-control" value="" /></form></div></div><div class="col-sm-4 col-md-3 col-lg-3 text-right"><ul class="opts list-inline hidden-xs"><li class="opts__item"><a href="/user/login" class="SFRegister btn-signin" style="margin-bottom:2px;">立即登录</a><a href="/user/register" class="SFLogin ml10 btn-signup"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          onClick="_gaq.push(['_trackEvent', 'Button', 'Click', 'Login']);">免费注册</a></li></ul></div></div></nav></div>
+<div class="wrap">
+    <div class="container">
+        <h1 class="h3 mt30">标签</h1>
+
+        <p>标签不仅能组织和归类你的内容，还能关联相似的内容。正确的使用标签将让你的问题被更多人发现和解决。</p>
+        <h2 class="h4 mt30">
+            常用标签
+            <small class="ml5"><a href="/tags/all">全部</a></small>
+        </h2>
+        <div class="row tag-list mt20">
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">开发语言</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/java" class="tag" data-toggle="popover" data-id="1040000000089449"
+                               data-original-title="java">
+                                <img src="https://avatar-static.segmentfault.com/868/271/868271510-54cb382abb7a1_small">
+                                java
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/c" class="tag" data-toggle="popover" data-id="1040000000089457"
+                               data-original-title="c">
+                                c
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/c%2B%2B" class="tag" data-toggle="popover" data-id="1040000000089741"
+                               data-original-title="c++">
+                                c++
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/php" class="tag" data-toggle="popover" data-id="1040000000089387"
+                               data-original-title="php">
+                                php
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/perl" class="tag" data-toggle="popover" data-id="1040000000089698"
+                               data-original-title="perl">
+                                perl
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/python" class="tag" data-toggle="popover" data-id="1040000000089534"
+                               data-original-title="python">
+                                <img src="https://avatar-static.segmentfault.com/252/177/2521771040-54cb53b372821_small">
+                                python
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/javascript" class="tag" data-toggle="popover" data-id="1040000000089436"
+                               data-original-title="javascript">
+                                javascript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/c%23" class="tag" data-toggle="popover" data-id="1040000000089581"
+                               data-original-title="c#">
+                                c#
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ruby" class="tag" data-toggle="popover" data-id="1040000000089699"
+                               data-original-title="ruby">
+                                ruby
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/go" class="tag" data-toggle="popover" data-id="1040000000090511"
+                               data-original-title="go">
+                                go
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/lua" class="tag" data-toggle="popover" data-id="1040000000090208"
+                               data-original-title="lua">
+                                lua
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/node.js" class="tag" data-toggle="popover" data-id="1040000000089918"
+                               data-original-title="node.js">
+                                node.js
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/erlang" class="tag" data-toggle="popover" data-id="1040000000090201"
+                               data-original-title="erlang">
+                                erlang
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/scala" class="tag" data-toggle="popover" data-id="1040000000090228"
+                               data-original-title="scala">
+                                scala
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/bash" class="tag" data-toggle="popover" data-id="1040000000089686"
+                               data-original-title="bash">
+                                bash
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/actionscript" class="tag" data-toggle="popover" data-id="1040000000090194"
+                               data-original-title="actionscript">
+                                actionscript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/golang" class="tag" data-toggle="popover" data-id="1040000000090203"
+                               data-original-title="golang">
+                                golang
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/typescript" class="tag" data-toggle="popover" data-id="1040000000365394"
+                               data-original-title="typescript">
+                                typescript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/flutter" class="tag" data-toggle="popover" data-id="1040000014898996"
+                               data-original-title="flutter">
+                                <img src="https://avatar-static.segmentfault.com/362/535/362535569-5cbf21e81c4e0_small">
+                                flutter
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">前端开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/html" class="tag" data-toggle="popover" data-id="1040000000089571"
+                               data-original-title="html">
+                                html
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/html5" class="tag" data-toggle="popover" data-id="1040000000089409"
+                               data-original-title="html5">
+                                <img src="https://avatar-static.segmentfault.com/102/500/1025005915-54cb538538eea_small">
+                                html5
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/css" class="tag" data-toggle="popover" data-id="1040000000089434"
+                               data-original-title="css">
+                                css
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/css3" class="tag" data-toggle="popover" data-id="1040000000090141"
+                               data-original-title="css3">
+                                css3
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/javascript" class="tag" data-toggle="popover" data-id="1040000000089436"
+                               data-original-title="javascript">
+                                javascript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/jquery" class="tag" data-toggle="popover" data-id="1040000000089733"
+                               data-original-title="jquery">
+                                <img src="https://avatar-static.segmentfault.com/745/445/745445564-54cb540ec31aa_small">
+                                jquery
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/json" class="tag" data-toggle="popover" data-id="1040000000090043"
+                               data-original-title="json">
+                                json
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ajax" class="tag" data-toggle="popover" data-id="1040000000090169"
+                               data-original-title="ajax">
+                                ajax
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F" class="tag" data-toggle="popover" data-id="1040000000089653"
+                               data-original-title="正则表达式">
+                                正则表达式
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/bootstrap" class="tag" data-toggle="popover" data-id="1040000000091210"
+                               data-original-title="bootstrap">
+                                bootstrap
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">JavaScript 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/javascript" class="tag" data-toggle="popover" data-id="1040000000089436"
+                               data-original-title="javascript">
+                                javascript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/jquery" class="tag" data-toggle="popover" data-id="1040000000089733"
+                               data-original-title="jquery">
+                                <img src="https://avatar-static.segmentfault.com/745/445/745445564-54cb540ec31aa_small">
+                                jquery
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/node.js" class="tag" data-toggle="popover" data-id="1040000000089918"
+                               data-original-title="node.js">
+                                node.js
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/chrome" class="tag" data-toggle="popover" data-id="1040000000089407"
+                               data-original-title="chrome">
+                                <img src="https://avatar-static.segmentfault.com/541/659/541659371-5df9fc6ddfc06_small">
+                                chrome
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/firefox" class="tag" data-toggle="popover" data-id="1040000000090217"
+                               data-original-title="firefox">
+                                firefox
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/internet-explorer" class="tag" data-toggle="popover" data-id="1040000000125504"
+                               data-original-title="internet-explorer">
+                                internet-explorer
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/angular.js" class="tag" data-toggle="popover" data-id="1040000000210853"
+                               data-original-title="angular.js">
+                                angular.js
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/typescript" class="tag" data-toggle="popover" data-id="1040000000365394"
+                               data-original-title="typescript">
+                                typescript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ecmascript" class="tag" data-toggle="popover" data-id="1040000000432618"
+                               data-original-title="ecmascript">
+                                ecmascript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/vue.js" class="tag" data-toggle="popover" data-id="1040000004003243"
+                               data-original-title="vue.js">
+                                vue.js
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/react.js" class="tag" data-toggle="popover" data-id="1040000002893277"
+                               data-original-title="react.js">
+                                react.js
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">小程序开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E5%B0%8F%E7%A8%8B%E5%BA%8F" class="tag" data-toggle="popover" data-id="1040000007092442"
+                               data-original-title="小程序">
+                                小程序
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F" class="tag" data-toggle="popover" data-id="1040000007005664"
+                               data-original-title="微信小程序">
+                                微信小程序
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%94%AF%E4%BB%98%E5%AE%9D%E5%B0%8F%E7%A8%8B%E5%BA%8F" class="tag" data-toggle="popover" data-id="1040000015420689"
+                               data-original-title="支付宝小程序">
+                                支付宝小程序
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E7%99%BE%E5%BA%A6%E6%99%BA%E8%83%BD%E5%B0%8F%E7%A8%8B%E5%BA%8F" class="tag" data-toggle="popover" data-id="1040000016998747"
+                               data-original-title="百度智能小程序">
+                                百度智能小程序
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%BE%AE%E4%BF%A1%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7" class="tag" data-toggle="popover" data-id="1040000013992657"
+                               data-original-title="微信开发者工具">
+                                微信开发者工具
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%A4%B4%E6%9D%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F" class="tag" data-toggle="popover" data-id="1040000017047525"
+                               data-original-title="头条小程序">
+                                头条小程序
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%BA%91%E5%BC%80%E5%8F%91" class="tag" data-toggle="popover" data-id="1040000020313720"
+                               data-original-title="小程序云开发">
+                                小程序云开发
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/wepy" class="tag" data-toggle="popover" data-id="1040000010713052"
+                               data-original-title="wepy">
+                                wepy
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mpvue" class="tag" data-toggle="popover" data-id="1040000013572139"
+                               data-original-title="mpvue">
+                                mpvue
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/taro" class="tag" data-toggle="popover" data-id="1040000016514476"
+                               data-original-title="taro">
+                                taro
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/uni-app" class="tag" data-toggle="popover" data-id="1040000019253569"
+                               data-original-title="uni-app">
+                                uni-app
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mpx" class="tag" data-toggle="popover" data-id="1040000021360812"
+                               data-original-title="mpx">
+                                mpx
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">区块链</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E6%AF%94%E7%89%B9%E5%B8%81" class="tag" data-toggle="popover" data-id="1040000000343451"
+                               data-original-title="比特币">
+                                <img src="https://avatar-static.segmentfault.com/272/250/2722506514-5a55e1864a41a_small">
+                                比特币
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%8C%BA%E5%9D%97%E9%93%BE" class="tag" data-toggle="popover" data-id="1040000004890636"
+                               data-original-title="区块链">
+                                区块链
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ico" class="tag" data-toggle="popover" data-id="1040000012765641"
+                               data-original-title="ico">
+                                ico
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6" class="tag" data-toggle="popover" data-id="1040000010675369"
+                               data-original-title="智能合约">
+                                智能合约
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E4%BB%A5%E5%A4%AA%E5%9D%8A" class="tag" data-toggle="popover" data-id="1040000010675360"
+                               data-original-title="以太坊">
+                                以太坊
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%95%B0%E5%AD%97%E5%8C%96%E8%B4%A7%E5%B8%81" class="tag" data-toggle="popover" data-id="1040000012765605"
+                               data-original-title="数字化货币">
+                                数字化货币
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">人工智能</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD" class="tag" data-toggle="popover" data-id="1040000000089791"
+                               data-original-title="人工智能">
+                                人工智能
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86" class="tag" data-toggle="popover" data-id="1040000000356023"
+                               data-original-title="自然语言处理">
+                                自然语言处理
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6" class="tag" data-toggle="popover" data-id="1040000000396073"
+                               data-original-title="自动驾驶">
+                                自动驾驶
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C" class="tag" data-toggle="popover" data-id="1040000000636902"
+                               data-original-title="神经网络">
+                                神经网络
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98" class="tag" data-toggle="popover" data-id="1040000000089829"
+                               data-original-title="数据挖掘">
+                                数据挖掘
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0" class="tag" data-toggle="popover" data-id="1040000000089788"
+                               data-original-title="机器学习">
+                                机器学习
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0" class="tag" data-toggle="popover" data-id="1040000000483243"
+                               data-original-title="深度学习">
+                                深度学习
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/tensorflow" class="tag" data-toggle="popover" data-id="1040000003984725"
+                               data-original-title="tensorflow">
+                                tensorflow
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">iOS 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/ios" class="tag" data-toggle="popover" data-id="1040000000089442"
+                               data-original-title="ios">
+                                <img src="https://avatar-static.segmentfault.com/300/191/3001919899-5488009eb028c_small">
+                                ios
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/objective-c" class="tag" data-toggle="popover" data-id="1040000000090209"
+                               data-original-title="objective-c">
+                                objective-c
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/sqlite" class="tag" data-toggle="popover" data-id="1040000000090354"
+                               data-original-title="sqlite">
+                                sqlite
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/safari" class="tag" data-toggle="popover" data-id="1040000000089499"
+                               data-original-title="safari">
+                                safari
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/xcode" class="tag" data-toggle="popover" data-id="1040000000089579"
+                               data-original-title="xcode">
+                                xcode
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/phonegap" class="tag" data-toggle="popover" data-id="1040000000115193"
+                               data-original-title="phonegap">
+                                phonegap
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/cocoa" class="tag" data-toggle="popover" data-id="1040000000090722"
+                               data-original-title="cocoa">
+                                cocoa
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/javascript" class="tag" data-toggle="popover" data-id="1040000000089436"
+                               data-original-title="javascript">
+                                javascript
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/macos" class="tag" data-toggle="popover" data-id="1040000000260425"
+                               data-original-title="macos">
+                                macos
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/iphone" class="tag" data-toggle="popover" data-id="1040000000089498"
+                               data-original-title="iphone">
+                                iphone
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ipad" class="tag" data-toggle="popover" data-id="1040000000090638"
+                               data-original-title="ipad">
+                                ipad
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/swift" class="tag" data-toggle="popover" data-id="1040000000531223"
+                               data-original-title="swift">
+                                swift
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">Android 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/android" class="tag" data-toggle="popover" data-id="1040000000089658"
+                               data-original-title="android">
+                                <img src="https://avatar-static.segmentfault.com/287/281/287281599-5a263edae47e9_small">
+                                android
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/java" class="tag" data-toggle="popover" data-id="1040000000089449"
+                               data-original-title="java">
+                                <img src="https://avatar-static.segmentfault.com/868/271/868271510-54cb382abb7a1_small">
+                                java
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/eclipse" class="tag" data-toggle="popover" data-id="1040000000089509"
+                               data-original-title="eclipse">
+                                eclipse
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/xml" class="tag" data-toggle="popover" data-id="1040000000089583"
+                               data-original-title="xml">
+                                xml
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/phonegap" class="tag" data-toggle="popover" data-id="1040000000115193"
+                               data-original-title="phonegap">
+                                phonegap
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/json" class="tag" data-toggle="popover" data-id="1040000000090043"
+                               data-original-title="json">
+                                json
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/webview" class="tag" data-toggle="popover" data-id="1040000000090505"
+                               data-original-title="webview">
+                                webview
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/android-studio" class="tag" data-toggle="popover" data-id="1040000000410239"
+                               data-original-title="android-studio">
+                                android-studio
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">PHP 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/php" class="tag" data-toggle="popover" data-id="1040000000089387"
+                               data-original-title="php">
+                                php
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mysql" class="tag" data-toggle="popover" data-id="1040000000089439"
+                               data-original-title="mysql">
+                                <img src="https://avatar-static.segmentfault.com/949/844/9498447-54cb56e325a72_small">
+                                mysql
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/apache" class="tag" data-toggle="popover" data-id="1040000000089761"
+                               data-original-title="apache">
+                                apache
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/nginx" class="tag" data-toggle="popover" data-id="1040000000090145"
+                               data-original-title="nginx">
+                                nginx
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mvc" class="tag" data-toggle="popover" data-id="1040000000089911"
+                               data-original-title="mvc">
+                                mvc
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/symfony" class="tag" data-toggle="popover" data-id="1040000000091266"
+                               data-original-title="symfony">
+                                symfony
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/zend-framework" class="tag" data-toggle="popover" data-id="1040000000090597"
+                               data-original-title="zend-framework">
+                                zend-framework
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/composer" class="tag" data-toggle="popover" data-id="1040000000154201"
+                               data-original-title="composer">
+                                composer
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/laravel" class="tag" data-toggle="popover" data-id="1040000000196640"
+                               data-original-title="laravel">
+                                laravel
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">数据库</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E6%95%B0%E6%8D%AE%E5%BA%93" class="tag" data-toggle="popover" data-id="1040000000089846"
+                               data-original-title="数据库">
+                                数据库
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mysql" class="tag" data-toggle="popover" data-id="1040000000089439"
+                               data-original-title="mysql">
+                                <img src="https://avatar-static.segmentfault.com/949/844/9498447-54cb56e325a72_small">
+                                mysql
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/sqlite" class="tag" data-toggle="popover" data-id="1040000000090354"
+                               data-original-title="sqlite">
+                                sqlite
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/oracle" class="tag" data-toggle="popover" data-id="1040000000090701"
+                               data-original-title="oracle">
+                                oracle
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/sql" class="tag" data-toggle="popover" data-id="1040000000090049"
+                               data-original-title="sql">
+                                sql
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/nosql" class="tag" data-toggle="popover" data-id="1040000000089432"
+                               data-original-title="nosql">
+                                nosql
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/redis" class="tag" data-toggle="popover" data-id="1040000000089431"
+                               data-original-title="redis">
+                                redis
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mongodb" class="tag" data-toggle="popover" data-id="1040000000089488"
+                               data-original-title="mongodb">
+                                <img src="https://avatar-static.segmentfault.com/183/816/1838168166-54cb5552ef5de_small">
+                                mongodb
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/memcached" class="tag" data-toggle="popover" data-id="1040000000089873"
+                               data-original-title="memcached">
+                                memcached
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/postgresql" class="tag" data-toggle="popover" data-id="1040000000090861"
+                               data-original-title="postgresql">
+                                postgresql
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">.NET 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/.net" class="tag" data-toggle="popover" data-id="1040000000089849"
+                               data-original-title=".net">
+                                .net
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/c%23" class="tag" data-toggle="popover" data-id="1040000000089581"
+                               data-original-title="c#">
+                                c#
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/asp.net" class="tag" data-toggle="popover" data-id="1040000000090433"
+                               data-original-title="asp.net">
+                                asp.net
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/visual-studio" class="tag" data-toggle="popover" data-id="1040000000090231"
+                               data-original-title="visual-studio">
+                                visual-studio
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mvc" class="tag" data-toggle="popover" data-id="1040000000089911"
+                               data-original-title="mvc">
+                                mvc
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/microsoft" class="tag" data-toggle="popover" data-id="1040000000090284"
+                               data-original-title="microsoft">
+                                microsoft
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">Python 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/python" class="tag" data-toggle="popover" data-id="1040000000089534"
+                               data-original-title="python">
+                                <img src="https://avatar-static.segmentfault.com/252/177/2521771040-54cb53b372821_small">
+                                python
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/List" class="tag" data-toggle="popover" data-id="1040000000394828"
+                               data-original-title="List">
+                                List
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/django" class="tag" data-toggle="popover" data-id="1040000000089564"
+                               data-original-title="django">
+                                django
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/flask" class="tag" data-toggle="popover" data-id="1040000000125263"
+                               data-original-title="flask">
+                                flask
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/tornado" class="tag" data-toggle="popover" data-id="1040000000116331"
+                               data-original-title="tornado">
+                                tornado
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/web.py" class="tag" data-toggle="popover" data-id="1040000000090740"
+                               data-original-title="web.py">
+                                web.py
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/sqlalchemy" class="tag" data-toggle="popover" data-id="1040000000125013"
+                               data-original-title="sqlalchemy">
+                                sqlalchemy
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/virtualenv" class="tag" data-toggle="popover" data-id="1040000000123810"
+                               data-original-title="virtualenv">
+                                virtualenv
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">Ruby 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/ruby" class="tag" data-toggle="popover" data-id="1040000000089699"
+                               data-original-title="ruby">
+                                ruby
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ruby-on-rails" class="tag" data-toggle="popover" data-id="1040000000089646"
+                               data-original-title="ruby-on-rails">
+                                ruby-on-rails
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/rubygems" class="tag" data-toggle="popover" data-id="1040000000090723"
+                               data-original-title="rubygems">
+                                rubygems
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/rvm" class="tag" data-toggle="popover" data-id="1040000000198244"
+                               data-original-title="rvm">
+                                rvm
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/macosx" class="tag" data-toggle="popover" data-id="1040000000090220"
+                               data-original-title="macosx">
+                                macosx
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/bundle" class="tag" data-toggle="popover" data-id="1040000000090898"
+                               data-original-title="bundle">
+                                bundle
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">开发工具</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/vim" class="tag" data-toggle="popover" data-id="1040000000089467"
+                               data-original-title="vim">
+                                vim
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/emacs" class="tag" data-toggle="popover" data-id="1040000000090216"
+                               data-original-title="emacs">
+                                emacs
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ide" class="tag" data-toggle="popover" data-id="1040000000090473"
+                               data-original-title="ide">
+                                ide
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/eclipse" class="tag" data-toggle="popover" data-id="1040000000089509"
+                               data-original-title="eclipse">
+                                eclipse
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/xcode" class="tag" data-toggle="popover" data-id="1040000000089579"
+                               data-original-title="xcode">
+                                xcode
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/intellij-idea" class="tag" data-toggle="popover" data-id="1040000000090560"
+                               data-original-title="intellij-idea">
+                                intellij-idea
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/textmate" class="tag" data-toggle="popover" data-id="1040000000089663"
+                               data-original-title="textmate">
+                                textmate
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/sublime-text" class="tag" data-toggle="popover" data-id="1040000000126097"
+                               data-original-title="sublime-text">
+                                sublime-text
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/visual-studio" class="tag" data-toggle="popover" data-id="1040000000090231"
+                               data-original-title="visual-studio">
+                                visual-studio
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/git" class="tag" data-toggle="popover" data-id="1040000000089459"
+                               data-original-title="git">
+                                git
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/github" class="tag" data-toggle="popover" data-id="1040000000091226"
+                               data-original-title="github">
+                                github
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/svn" class="tag" data-toggle="popover" data-id="1040000000089447"
+                               data-original-title="svn">
+                                svn
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/hg" class="tag" data-toggle="popover" data-id="1040000000183694"
+                               data-original-title="hg">
+                                hg
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/docker" class="tag" data-toggle="popover" data-id="1040000000366352"
+                               data-original-title="docker">
+                                docker
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ci" class="tag" data-toggle="popover" data-id="1040000000372952"
+                               data-original-title="ci">
+                                ci
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">云计算</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E4%BA%91%E8%AE%A1%E7%AE%97" class="tag" data-toggle="popover" data-id="1040000000090078"
+                               data-original-title="云计算">
+                                云计算
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%8F%88%E6%8B%8D%E4%BA%91%E5%AD%98%E5%82%A8" class="tag" data-toggle="popover" data-id="1040000000126696"
+                               data-original-title="又拍云存储">
+                                又拍云存储
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E4%B8%83%E7%89%9B%E4%BA%91%E5%AD%98%E5%82%A8" class="tag" data-toggle="popover" data-id="1040000000137810"
+                               data-original-title="七牛云存储">
+                                <img src="https://avatar-static.segmentfault.com/119/227/1192272433-i-1040000000137810_small">
+                                七牛云存储
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/amazon-web-services" class="tag" data-toggle="popover" data-id="1040000000126680"
+                               data-original-title="amazon-web-services">
+                                <img src="https://avatar-static.segmentfault.com/185/450/1854509098-54cb56ae231b7_small">
+                                amazon-web-services
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E7%99%BE%E5%BA%A6%E4%BA%91" class="tag" data-toggle="popover" data-id="1040000000134134"
+                               data-original-title="百度云">
+                                百度云
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E9%87%91%E5%B1%B1%E4%BA%91" class="tag" data-toggle="popover" data-id="1040000000403764"
+                               data-original-title="金山云">
+                                金山云
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E7%BE%8E%E5%9B%A2%E4%BA%91" class="tag" data-toggle="popover" data-id="1040000000383227"
+                               data-original-title="美团云">
+                                美团云
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E8%85%BE%E8%AE%AF%E4%BA%91" class="tag" data-toggle="popover" data-id="1040000000309629"
+                               data-original-title="腾讯云">
+                                腾讯云
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E4%BA%91%E6%9D%89%E7%BD%91%E7%BB%9C" class="tag" data-toggle="popover" data-id="1040000020398091"
+                               data-original-title="云杉网络">
+                                云杉网络
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/deepflow" class="tag" data-toggle="popover" data-id="1040000020398110"
+                               data-original-title="deepflow">
+                                deepflow
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ucloud" class="tag" data-toggle="popover" data-id="1040000000200564"
+                               data-original-title="ucloud">
+                                ucloud
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E7%81%B5%E9%9B%80%E4%BA%91" class="tag" data-toggle="popover" data-id="1040000021298246"
+                               data-original-title="灵雀云">
+                                灵雀云
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/alauda" class="tag" data-toggle="popover" data-id="1040000021298270"
+                               data-original-title="alauda">
+                                alauda
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">大数据</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E5%A4%A7%E6%95%B0%E6%8D%AE" class="tag" data-toggle="popover" data-id="1040000000155662"
+                               data-original-title="大数据">
+                                大数据
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/talkingdata" class="tag" data-toggle="popover" data-id="1040000000344935"
+                               data-original-title="talkingdata">
+                                talkingdata
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E6%B6%9B%E6%80%9D%E6%95%B0%E6%8D%AE" class="tag" data-toggle="popover" data-id="1040000020395998"
+                               data-original-title="涛思数据">
+                                涛思数据
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/kylin" class="tag" data-toggle="popover" data-id="1040000004524933"
+                               data-original-title="kylin">
+                                kylin
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/flink" class="tag" data-toggle="popover" data-id="1040000004593946"
+                               data-original-title="flink">
+                                flink
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/kafka" class="tag" data-toggle="popover" data-id="1040000000623138"
+                               data-original-title="kafka">
+                                kafka
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/tdengine" class="tag" data-toggle="popover" data-id="1040000020395950"
+                               data-original-title="tdengine">
+                                tdengine
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/hadoop" class="tag" data-toggle="popover" data-id="1040000000089648"
+                               data-original-title="hadoop">
+                                hadoop
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/spark" class="tag" data-toggle="popover" data-id="1040000000487620"
+                               data-original-title="spark">
+                                spark
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/hdfs" class="tag" data-toggle="popover" data-id="1040000000181219"
+                               data-original-title="hdfs">
+                                hdfs
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/mapreduce" class="tag" data-toggle="popover" data-id="1040000000140895"
+                               data-original-title="mapreduce">
+                                mapreduce
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/cloudera" class="tag" data-toggle="popover" data-id="1040000000170364"
+                               data-original-title="cloudera">
+                                cloudera
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/hive" class="tag" data-toggle="popover" data-id="1040000000090806"
+                               data-original-title="hive">
+                                hive
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ambari" class="tag" data-toggle="popover" data-id="1040000005627138"
+                               data-original-title="ambari">
+                                ambari
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/sqoop" class="tag" data-toggle="popover" data-id="1040000002532291"
+                               data-original-title="sqoop">
+                                sqoop
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/zookeeper" class="tag" data-toggle="popover" data-id="1040000000146794"
+                               data-original-title="zookeeper">
+                                zookeeper
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">Java 开发</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/java" class="tag" data-toggle="popover" data-id="1040000000089449"
+                               data-original-title="java">
+                                <img src="https://avatar-static.segmentfault.com/868/271/868271510-54cb382abb7a1_small">
+                                java
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/java-ee" class="tag" data-toggle="popover" data-id="1040000000090793"
+                               data-original-title="java-ee">
+                                java-ee
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/jar" class="tag" data-toggle="popover" data-id="1040000000157938"
+                               data-original-title="jar">
+                                jar
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/spring" class="tag" data-toggle="popover" data-id="1040000000090103"
+                               data-original-title="spring">
+                                spring
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/hibernate" class="tag" data-toggle="popover" data-id="1040000000090592"
+                               data-original-title="hibernate">
+                                hibernate
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/struts" class="tag" data-toggle="popover" data-id="1040000000089638"
+                               data-original-title="struts">
+                                struts
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/tomcat" class="tag" data-toggle="popover" data-id="1040000000090117"
+                               data-original-title="tomcat">
+                                tomcat
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/maven" class="tag" data-toggle="popover" data-id="1040000000090186"
+                               data-original-title="maven">
+                                maven
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/eclipse" class="tag" data-toggle="popover" data-id="1040000000089509"
+                               data-original-title="eclipse">
+                                eclipse
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/intellij-idea" class="tag" data-toggle="popover" data-id="1040000000090560"
+                               data-original-title="intellij-idea">
+                                intellij-idea
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">搜索</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E" class="tag" data-toggle="popover" data-id="1040000000090137"
+                               data-original-title="搜索引擎">
+                                搜索引擎
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D" class="tag" data-toggle="popover" data-id="1040000000090419"
+                               data-original-title="中文分词">
+                                中文分词
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2" class="tag" data-toggle="popover" data-id="1040000000090334"
+                               data-original-title="全文检索">
+                                全文检索
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/lucene" class="tag" data-toggle="popover" data-id="1040000000090316"
+                               data-original-title="lucene">
+                                lucene
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/solr" class="tag" data-toggle="popover" data-id="1040000000090126"
+                               data-original-title="solr">
+                                solr
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/sphinx" class="tag" data-toggle="popover" data-id="1040000000090021"
+                               data-original-title="sphinx">
+                                sphinx
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/analyzer" class="tag" data-toggle="popover" data-id="1040000000090318"
+                               data-original-title="analyzer">
+                                analyzer
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/elasticsearch" class="tag" data-toggle="popover" data-id="1040000000250111"
+                               data-original-title="elasticsearch">
+                                elasticsearch
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/elastic" class="tag" data-toggle="popover" data-id="1040000021683842"
+                               data-original-title="elastic">
+                                elastic
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">开放平台</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/%E5%BE%AE%E4%BF%A1" class="tag" data-toggle="popover" data-id="1040000000090818"
+                               data-original-title="微信">
+                                微信
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E7%99%BE%E5%BA%A6" class="tag" data-toggle="popover" data-id="1040000000090113"
+                               data-original-title="百度">
+                                百度
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/facebook" class="tag" data-toggle="popover" data-id="1040000000089479"
+                               data-original-title="facebook">
+                                facebook
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/twitter" class="tag" data-toggle="popover" data-id="1040000000122015"
+                               data-original-title="twitter">
+                                <img src="https://avatar-static.segmentfault.com/489/442/489442300-54cb55806c256_small">
+                                twitter
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/paddle" class="tag" data-toggle="popover" data-id="1040000010066962"
+                               data-original-title="paddle">
+                                paddle
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%B9%B3%E5%8F%B0" class="tag" data-toggle="popover" data-id="1040000000189880"
+                               data-original-title="微信公众平台">
+                                微信公众平台
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E5%BE%AE%E4%BF%A1%E5%BC%80%E6%94%BE%E5%B9%B3%E5%8F%B0" class="tag" data-toggle="popover" data-id="1040000000243318"
+                               data-original-title="微信开放平台">
+                                微信开放平台
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tag-list__itemWraper">
+                <div class="tag-list__itemInnerBox">
+                    <h3 class="h5 tag-list__itemheader">服务器</h3>
+                    <ul class="tag-list__itembody taglist--inline multi">
+                        <li class="tagPopup">
+                            <a href="/t/linux" class="tag" data-toggle="popover" data-id="1040000000089392"
+                               data-original-title="linux">
+                                linux
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/unix" class="tag" data-toggle="popover" data-id="1040000000090646"
+                               data-original-title="unix">
+                                unix
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/ubuntu" class="tag" data-toggle="popover" data-id="1040000000090245"
+                               data-original-title="ubuntu">
+                                <img src="https://avatar-static.segmentfault.com/335/109/3351090335-569f0f26a2a86_small">
+                                ubuntu
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/windows-server" class="tag" data-toggle="popover" data-id="1040000000090609"
+                               data-original-title="windows-server">
+                                windows-server
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/centos" class="tag" data-toggle="popover" data-id="1040000000090249"
+                               data-original-title="centos">
+                                centos
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1" class="tag" data-toggle="popover" data-id="1040000000090107"
+                               data-original-title="负载均衡">
+                                负载均衡
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/%E7%BC%93%E5%AD%98" class="tag" data-toggle="popover" data-id="1040000000090401"
+                               data-original-title="缓存">
+                                缓存
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/apache" class="tag" data-toggle="popover" data-id="1040000000089761"
+                               data-original-title="apache">
+                                apache
+                            </a>
+                        </li>
+                        <li class="tagPopup">
+                            <a href="/t/nginx" class="tag" data-toggle="popover" data-id="1040000000090145"
+                               data-original-title="nginx">
+                                nginx
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div><!-- /.stream-list -->
+
+        <h2 class="h4 mt30">社区子站</h2>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/101">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/393/562/3935623170-1140000000142909_big64"
+                             alt="101 新手上路">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/101">101 新手上路</a></h3>
+
+                        <p class="text-muted mb0">面向新手开发者的问题集中营</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/mongodb">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/175/275/1752754410-1140000000601658_big64"
+                             alt="MongoDB 技术问答">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/mongodb">MongoDB 技术问答</a></h3>
+
+                        <p class="text-muted mb0">社区力量为主，同时有 MongoDB 官方技术人员支持的旨在推广 MongoDB 的普及和最佳使用方案的社区。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/qiniu">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/269/056/2690569955-5beba5a956620_big64"
+                             alt="七牛云存储问答">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/qiniu">七牛云存储问答</a></h3>
+
+                        <p class="text-muted mb0">非结构化静态文件的高速稳定安全云存储平台</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/openhw">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/196/388/1963885910-54af96065b546_big64"
+                             alt="开源硬件与嵌入式问答">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/openhw">开源硬件与嵌入式问答</a></h3>
+
+                        <p class="text-muted mb0">树莓派、Arduino 与其他开源硬件开发问答专区</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/0x">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/406/514/4065140650-1140000000145939_big64"
+                             alt="社区建设">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/0x">社区建设</a></h3>
+
+                        <p class="text-muted mb0">SegmentFault 社区建设建议反馈讨论</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/upyun">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/272/424/2724247736-58db1f05475f4_big64"
+                             alt="UPYUN 问答">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/upyun">UPYUN 问答</a></h3>
+
+                        <p class="text-muted mb0">非结构化数据云存储、云处理、云分发平台</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/weixin">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/287/570/2875704635-1140000000145753_big64"
+                             alt="微信开放平台问答">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/weixin">微信开放平台问答</a></h3>
+
+                        <p class="text-muted mb0">SegmentFault 微信开放平台 问答专区</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/thingxcloud">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/985/130/98513082-5beb90d1b3bc5_big64"
+                             alt="中兴IoT平台">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/thingxcloud">中兴IoT平台</a></h3>
+
+                        <p class="text-muted mb0">中兴物联网技术问答</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="media border">
+                    <a class="pull-left" href="/grapecity">
+                        <img class="media-object" width="40" height="40" src="https://avatar-static.segmentfault.com/694/516/694516597-5b597d60bb8c7_big64"
+                             alt="葡萄城">
+                    </a>
+
+                    <div class="media-body">
+                        <h3 class="h5 media-heading"><a href="/grapecity">葡萄城</a></h3>
+
+                        <p class="text-muted mb0">葡萄城技术问答</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script type='text/javascript'>
+    OA_show(4);
+</script>
+
+<footer id="footer">
+    <div class="container">
+        <div class="row hidden-xs">
+            <dl class="col-sm-2 site-link">
+                <dt>产品</dt>
+                <dd><a href="/questions/hottest?utm_source=sf-footer" target="_blank">热门问答</a></dd>
+                <dd><a href="/blogs/hottest?utm_source=sf-footer" target="_blank">热门专栏</a></dd>
+                <dd><a href="/lives?utm_source=sf-footer" target="_blank">热门课程</a></dd>
+                <dd><a href="/events?utm_source=sf-footer" target="_blank">最新活动</a></dd>
+                <dd><a href="/groups?utm_source=sf-footer" target="_blank">技术圈</a></dd>
+                <dd><a href="/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">酷工作</a></dd>
+                <dd><a href="/app?utm_source=sf-footer" target="_blank">移动客户端</a></dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>课程</dt>
+                <dd><a href="/lives/edu?tag=java&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Java 开发课程</a></dd>
+                <dd><a href="/lives/edu?tag=php&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">PHP 开发课程</a></dd>
+                <dd><a href="/lives/edu?tag=python&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">Python 开发课程</a></dd>
+                <dd><a href="/lives/edu?category=1&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">前端开发课程</a></dd>
+                <dd><a href="/lives/study?category=3&amp;sort=hottest&amp;utm_source=sf-footer" target="_blank">移动开发课程</a></dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>资源</dt>
+                <dd><a href="/weekly?utm_source=sf-footer" target="_blank">每周精选</a></dd>
+                <dd><a href="/users?utm_source=sf-footer" target="_blank">用户排行榜</a></dd>
+                <dd><a href="/badges?utm_source=sf-footer" target="_blank">徽章</a></dd>
+                <dd><a href="/faq?utm_source=sf-footer" target="_blank">帮助中心</a></dd>
+                <dd><a href="/repu?utm_source=sf-footer" target="_blank">声望与权限</a></dd>
+                <dd><a href="/community?utm_source=sf-footer" target="_blank">社区服务中心</a></dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>合作</dt>
+                <dd><a href="https://about.segmentfault.com/?utm_source=sf-footer" target="_blank">关于我们</a></dd>
+                <dd><a href="https://business.segmentfault.com/ads?utm_source=sf-footer" target="_blank">广告投放</a></dd>
+                <dd><a href="/groups?tab=jobs&amp;utm_source=sf-footer" target="_blank">职位发布</a></dd>
+                <dd><a href="https://jinshuju.net/f/HK5r9K?utm_source=sf-footer" target="_blank">讲师招募</a></dd>
+                <dd><a href="https://about.segmentfault.com/contact.html?utm_source=sf-footer" target="_blank">联系我们</a></dd>
+                <dd><a href="/link?utm_source=sf-footer" target="_blank">合作伙伴</a></dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link">
+                <dt>关注</dt>
+                <dd><a href="/blog/segmentfault?utm_source=sf-footer" target="_blank">产品技术日志</a></dd>
+                <dd><a href="/blog/community_admin?utm_source=sf-footer" target="_blank">社区运营日志</a></dd>
+                <dd><a href="/blog/segmentfault_news?utm_source=sf-footer" target="_blank">市场运营日志</a></dd>
+                <dd><a href="/blog/segmentfault_team?utm_source=sf-footer" target="_blank">团队日志</a></dd>
+                <dd><a href="/blog/interview?utm_source=sf-footer" target="_blank">社区访谈</a></dd>
+                <dd>
+                    <ul class="sn-inline">
+                        <li>
+                            <a class="entypo-wechart icon-sn-weixin weixin-popover-qrcode" data-toggle="popover" data-placement="top"  data-content="">微信</a>
+                        </li>
+                        <li>
+                            <a href="http://weibo.com/segmentfault" target="_blank" class="entypo-weibo icon-sn-weibo" >新浪微博</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/SegmentFault" target="_blank" class="entypo-facebook icon-sn-github">Github</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/segment_fault" target="_blank" class="entypo-twitter icon-sn-twitter">Twitter</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+
+            <dl class="col-sm-2 site-link" id="license">
+                <dt>条款</dt>
+                <dd><a href="/tos?utm_source=sf-footer" target="_blank">服务条款</a></dd>
+                <dd><a href="/privacy?utm_source=sf-footer" target="_blank">隐私政策</a></dd>
+                <dd>
+                    <a href="/app" class="clearfix mt10 block"><img src="https://cdn.segmentfault.com/v-5e81b20e/page/img/app/appQrcode.png" class="app-qrcode"></a>
+                    <div class="app-download-desc">
+                        <p>扫一扫下载 App</p>
+                    </div>
+
+                </dd>
+            </dl>
+        </div>
+        <div class="copyright">
+            Copyright &copy; 2011-2020 SegmentFault. 当前呈现版本 19.02.27<br>
+            <a href="http://beian.miit.gov.cn" rel="nofollow">浙ICP备 15005796号-2</a> &nbsp;
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602002000" rel="nofollow">浙公网安备 33010602002000号</a>
+            <span class="ml5">杭州堆栈科技有限公司版权所有</span>
+        </div>
+        <p class="text-center">
+            <a class="js__view--selector hidden-sm hidden-md hidden-lg" data-action="mobile" href="javascript:;">移动版</a>
+            <a class="js__view--selector hidden-sm hidden-md hidden-lg" data-action="desktop" href="javascript:;">桌面版</a>
+        </p>
+    </div>
+</footer>
+
+<div id="fixedTools" class="hidden-xs hidden-sm">
+    <a id="backtop" class="hidden border-bottom" href="#">回顶部</a>
+</div>
+
+<script id="loginModal" type="text/template">
+    <div class="row bg-white login-modal">
+        <div class="col-md-12 login-wrap">
+            <form action="/api/user/login" method="POST" role="form" class="mt15">
+                <div class="form-group hidden">
+                    <input type="text" class="form-control" name="remember" value="1"
+                           autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="username" class="control-label">手机号 或 Email</label>
+                    <input type="text" class="form-control" name="username" tabindex="1" required placeholder="11 位手机号 或 Email"
+                           autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">密码</label><span class="pull-right"><a
+                        href="/user/forgot" tabindex="4">忘记密码</a></span>
+                    <input type="password" class="form-control" name="password" tabindex="2" required placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <a
+
+                            href="/user/phoneLogin"
+                            class="phoneLogin"
+                    >手机验证码登录</a>
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pull-right pl20 pr20" tabindex="3"
+                            onclick='ga("send", "event", "email login button", "clicked", "login modal");'>登录
+                    </button>
+                </div>
+            </form>
+            <div class="text-muted text-center more-login-area">
+                <span class="more-login-words">更多登录方式</span>
+            </div>
+            <div class="widget-login mb15 text-center">
+                <a href="/user/oauth/google" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                        class="icon-sn-google"></span></a>
+                <a href="/user/oauth/github" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                        class="icon-sn-github"></span></a>
+                <a href="/user/oauth/weibo" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                        class="icon-sn-weibo"></span></a>
+                <a href="/user/oauth/qq" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                        class="icon-sn-qq"></span></a>
+                <a href="/user/oauth/weixin" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                        class="icon-sn-weixin"></span></a>
+                <a href="/user/oauth/linkedin" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                        class="icon-sn-linkedin"></span></a>
+                <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+                <a href="/user/oauth/twitter" class=" hidden"
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                        class="icon-sn-twitter"></span></a>
+                <a href="/user/oauth/facebook" class=" hidden"
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                        class="icon-sn-facebook"></span></a>
+            </div>
+            <div class="form-group clearfix">
+                <a class="btn-block btn btn-default pull-right pl20 pr20
+                        SFLogin
+             "
+
+
+                   onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                    注册新账号
+                </a>
+            </div>
+            <p class="text-muted text-center mb15">继续即表示你同意<a href="/tos" target="_blank">《服务条款》</a>和<a href="/privacy" target="_blank">《隐私政策》</a></p>        </div>
+    </div>
+</script>
+<script id="registerModal" type="text/template">
+    <div class="row bg-white login-modal">
+        <div class="col-md-12 login-wrap">
+
+            <form action="/api/user/register" method="POST" role="form" class="mt15">
+                <div class="form-group">
+                    <label for="name" class="control-label">你的名字</label>
+                    <input type="text" class="form-control" name="name" required placeholder="真实姓名或常用昵称">
+                </div>
+
+                <div class="form-group">
+                    <label for="mail" class="control-label">手机号</label>
+                    <input type="text" class="form-control" id="login-name" name="mail" required placeholder="11 位手机号">
+                </div>
+
+                <input type="text" class="hidden" name="register_type" value="mail">
+
+                <div class="form-group">
+                    <div class="captchaInput mb10">
+                        <input type="text" class="form-control" name="cap" placeholder="右侧的验证码" style="width:50%; display: inline; margin-right: 15px;">
+                        <span class="mt10">
+                                <a id="loginReloadCaptcha" href="javascript:void(0)">
+                                <img src="/user/captcha?w=135&h=34" class="cap" width="135" height="34"/></a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="phone-register-only hidden">
+                        <div class="input-group">
+                            <input name="code" type="text" class="form-control js-user-login__phone-code-value" placeholder="短信验证码">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default js-user-login__phone-vaild-btn" style="width:96px;" type="button">
+                                获取验证码</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="control-label">密码</label>
+                    <input type="password" class="form-control" name="password" required placeholder="不少于 6 位的密码">
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pl20 pr20 pull-right"
+                            onclick='ga("send", "event", "email register button", "clicked", "login modal");'>注册
+                    </button>
+                </div>
+                <div class="text-muted text-center more-login-area">
+                    <span class="more-login-words">更多登录方式</span>
+                </div>
+                <div class="widget-login mb15 text-center">
+                    <a href="/user/oauth/google" class=""
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                            class="icon-sn-google"></span></a>
+                    <a href="/user/oauth/github" class=""
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                            class="icon-sn-github"></span></a>
+                    <a href="/user/oauth/weibo" class=""
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                            class="icon-sn-weibo"></span></a>
+                    <a href="/user/oauth/qq" class=""
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                            class="icon-sn-qq"></span></a>
+                    <a href="/user/oauth/weixin" class=""
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                            class="icon-sn-weixin"></span></a>
+                    <a href="/user/oauth/linkedin" class=""
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                            class="icon-sn-linkedin"></span></a>
+                    <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+                    <a href="/user/oauth/twitter" class=" hidden"
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                            class="icon-sn-twitter"></span></a>
+                    <a href="/user/oauth/facebook" class=" hidden"
+                       onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                            class="icon-sn-facebook"></span></a>
+                </div>
+                <div class="form-group clearfix">
+                    <a class="btn-block btn btn-default pull-right pl20 pr20
+                        SFRegister
+             "
+
+
+                       onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                        已有账号登录
+                    </a>
+                </div>
+                <p class="text-muted text-center mb15">继续即表示你同意<a href="/tos" target="_blank">《服务条款》</a>和<a href="/privacy" target="_blank">《隐私政策》</a></p>            </form>
+        </div>
+    </div>
+</script>
+<script id="phoneLoginModal" type="text/template">
+
+    <div class="row bg-white login-modal phonelogin-modal">
+        <div class="col-md-12 login-wrap">
+            <form action="/api/user/phonelogin" method="POST" role="form" class="mt15">
+                <div class="form-group">
+                    <label for="phone" class="control-label required">手机号</label>
+                    <input type="text" class="form-control phonelogin--phone" name="phone" tabindex="1" required placeholder="11 位手机号"
+                           autocomplete="off">
+                    <span class="help-block"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="authCode" class="control-label required">验证码</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control bindphone--code" name="authCode" placeholder="短信验证码">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default user-bind__phone-vaild-btn" type="button">获取验证码</button>
+                        </span>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+
+                <div class="form-group">
+                    <a
+                            href="/user/login"
+                            class="SFRegister"
+                    >密码登录（手机号或 Email）</a>
+                </div>
+                <div class="form-group clearfix">
+                    <button type="submit" class="btn-block btn btn-primary pull-right pl20 pr20" tabindex="3"
+                            onclick='ga("send", "event", "email login button", "clicked", "login modal");'>登录
+                    </button>
+                </div>
+            </form>
+            <div class="text-muted text-center more-login-area">
+                <span class="more-login-words">更多登录方式</span>
+            </div>
+            <div class="widget-login mb15 text-center">
+                <a href="/user/oauth/google" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "google"});'><span
+                        class="icon-sn-google"></span></a>
+                <a href="/user/oauth/github" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "github"});");'><span
+                        class="icon-sn-github"></span></a>
+                <a href="/user/oauth/weibo" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "weibo"});'><span
+                        class="icon-sn-weibo"></span></a>
+                <a href="/user/oauth/qq" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                        class="icon-sn-qq"></span></a>
+                <a href="/user/oauth/weixin" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "qq"});'><span
+                        class="icon-sn-weixin"></span></a>
+                <a href="/user/oauth/linkedin" class=""
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "linkedin"});'><span
+                        class="icon-sn-linkedin"></span></a>
+                <span id="loginShowMore" style="cursor: pointer" class="mb5"><span class="icon-sn-dotted"></span></span>
+                <a href="/user/oauth/twitter" class=" hidden"
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "twitter"});'><span
+                        class="icon-sn-twitter"></span></a>
+                <a href="/user/oauth/facebook" class=" hidden"
+                   onclick='ga("send", "event", "3rd login button", "clicked", "login modal", {media: "facebook"});'><span
+                        class="icon-sn-facebook"></span></a>
+            </div>
+            <div class="form-group clearfix">
+                <a class="btn-block btn btn-default pull-right pl20 pr20
+                        SFLogin
+             "
+
+
+                   onclick='ga("send", "event", "email login button", "clicked", "login modal");'>
+                    注册新账号
+                </a>
+            </div>
+            <p class="text-muted text-center mb15">继续即表示你同意<a href="/tos" target="_blank">《服务条款》</a>和<a href="/privacy" target="_blank">《隐私政策》</a></p>        </div>
+    </div>
+</script>
+
+
+<script>
+    window.serverTime = 1586013954000;
+</script>
+
+<script>
+    (function (w) {
+        w.SF = {
+            staticUrl: "https://cdn.segmentfault.com/v-5e81b20e"
+        };
+        w.SF.token = (function () {
+            var _jod = //'zsT'
+                'f1'+//'Tn'
+                'Tn'+'2'//'uoG'
+                +//'5ZK'
+                '121'+//'r'
+                'r'+//'8w6'
+                '8w6'+'6'//'P'
+                +'a8'//'h'
+                +//'x'
+                'f0'+'41'//'nJ8'
+                +//'V'
+                '3'+//'r'
+                '8'+//'f'
+                '21'+//'H'
+                '4'+//'BaL'
+                'a'+//'6i'
+                'fb'+'G9d'//'G9d'
+                +'fb'//'Z'
+                +//'C0E'
+                '1'+/* 'Q'//'Q' */''+//'Lw'
+                '8'+//'li'
+                'ee6'+'ab4'//'N'
+                +''///*'sNS'*/'sNS'
+                +'d'//'Qe'
+                , _wCZKQo = [[2,4],[6,7],[6,9],[21,24]];
+
+            for (var i = 0; i < _wCZKQo.length; i ++) {
+                _jod = _jod.substring(0, _wCZKQo[i][0]) + _jod.substring(_wCZKQo[i][1]);
+            }
+
+            return _jod;
+        })();;
+    })(window);
+
+    var lock = {
+        type: "",
+        text: '',
+        table: {"ban_post":[1,"\u4f60\u5df2\u7ecf\u88ab\u7981\u8a00, \u65e0\u6cd5\u8fdb\u884c\u6b64\u64cd\u4f5c, \u5982\u6709\u7591\u4e49\u8bf7\u63d0\u4ea4\u7533\u8bc9, \u6216\u8005\u53d1\u90ae\u4ef6\u5230pr@segmentfault.com"]}
+    };
+
+    var ddosMode = false;
+
+    (function (currentUrl) {
+        if (typeof URL != 'undefined') {
+            var baseUrl = new URL('https://segmentfault.com');
+
+            if (baseUrl.protocol != currentUrl.protocol
+                || baseUrl.host != currentUrl.host) {
+                window.location.href = baseUrl.protocol + '//' + baseUrl.host
+                    + currentUrl.pathname + currentUrl.search + currentUrl.hash;
+            }
+        }
+    })(window.location);
+</script>
+
+<script crossorigin src="https://cdn.segmentfault.com/v-5e81b20e/3rd/assets.js"></script>
+
+<script crossorigin src="https://cdn.segmentfault.com/v-5e81b20e/tag/script/index.min.js"></script>
+
+
+
+
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-918487-8');
+</script>
+
+
+
+</body>
+</html>
